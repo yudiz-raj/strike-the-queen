@@ -616,6 +616,7 @@ class Level extends Phaser.Scene {
 					if (angle < -1.59) {
 						this.arrow.setRotation(-(-angle + 7.9));
 					}
+					
 					else {
 						this.arrow.setRotation(angle - 1.6);
 					}
