@@ -73,7 +73,7 @@
                                     "id": "4e4c0371-a436-4849-803c-c8df1028aafc",
                                     "label": "wall_3",
                                     "components": [],
-                                    "x": 1423,
+                                    "x": 1424,
                                     "y": 540,
                                     "scaleX": 0.2,
                                     "scaleY": 7,
@@ -86,7 +86,7 @@
                                     "id": "4a88babe-8bb1-4d67-b66a-e72162c23f4c",
                                     "label": "wall_4",
                                     "components": [],
-                                    "x": 955,
+                                    "x": 969,
                                     "y": 989,
                                     "scaleX": 0.2,
                                     "scaleY": 7,
@@ -212,7 +212,7 @@
                             "texture": {
                                 "key": "slider"
                             },
-                            "x": -286,
+                            "x": -278,
                             "y": -8,
                             "scaleX": 0.2,
                             "scaleY": 0.2
