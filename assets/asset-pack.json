@@ -1,0 +1,113 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/images/background-img.png",
+                "type": "image",
+                "key": "background-img"
+            },
+            {
+                "url": "assets/images/banner-img.jpg",
+                "type": "image",
+                "key": "banner-img"
+            },
+            {
+                "url": "assets/images/blackCoin.png",
+                "type": "image",
+                "key": "blackCoin"
+            },
+            {
+                "url": "assets/images/carrom-board.png",
+                "type": "image",
+                "key": "carrom-board"
+            },
+            {
+                "url": "assets/images/direction-arrow.png",
+                "type": "image",
+                "key": "direction-arrow"
+            },
+            {
+                "url": "src/scripts/GameManager.js",
+                "type": "script",
+                "key": "GameManager"
+            },
+            {
+                "url": "src/scripts/InputManager.js",
+                "type": "script",
+                "key": "InputManager"
+            },
+            {
+                "url": "src/scenes/Level.js",
+                "type": "sceneFile",
+                "key": "Level"
+            },
+            {
+                "url": "src/scenes/Loading.js",
+                "type": "sceneFile",
+                "key": "Loading"
+            },
+            {
+                "url": "assets/images/logo.png",
+                "type": "image",
+                "key": "logo"
+            },
+            {
+                "url": "assets/images/opponent-img.png",
+                "type": "image",
+                "key": "opponent-img"
+            },
+            {
+                "url": "assets/images/pointer.png",
+                "type": "image",
+                "key": "pointer"
+            },
+            {
+                "url": "assets/images/slidebar.png",
+                "type": "image",
+                "key": "slidebar"
+            },
+            {
+                "url": "assets/images/slider.png",
+                "type": "image",
+                "key": "slider"
+            },
+            {
+                "url": "src/scripts/SocketManager.js",
+                "type": "script",
+                "key": "SocketManager"
+            },
+            {
+                "url": "src/scripts/SoundManager.js",
+                "type": "script",
+                "key": "SoundManager"
+            },
+            {
+                "url": "assets/images/start-button.png",
+                "type": "image",
+                "key": "start-button"
+            },
+            {
+                "url": "assets/images/striker.png",
+                "type": "image",
+                "key": "striker"
+            },
+            {
+                "url": "assets/images/user-img.png",
+                "type": "image",
+                "key": "user-img"
+            },
+            {
+                "url": "assets/images/whiteCoin.png",
+                "type": "image",
+                "key": "whiteCoin"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
