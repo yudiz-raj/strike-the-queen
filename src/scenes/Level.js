@@ -10,6 +10,8 @@ let userTurn = true;
 let strikerCollideWithHall = false;
 let repeateUserTurn = false;
 let repeateOpponentTurn = false;
+let userQueenFouls = false;
+let opponentQueenFouls = false;
 let nUserScore = 0;
 let nOpponentScore = 0;
 let userWin = true;
@@ -437,6 +439,7 @@ class Level extends Phaser.Scene {
 		this.setCollider();
 		let cursors = this.input.keyboard.createCursorKeys();
 		// this.input.keyboard.on('keydown', this.setStrikerPosition, this);
+		this.strikeCoins();
 		this.setStrikerPosition();
 
 	}
@@ -444,7 +447,7 @@ class Level extends Phaser.Scene {
 	setCollider() {
 
 		this.physics.add.collider(this.wallGroup, this.striker, () => {
-			this.checkSpeed();
+			// this.checkSpeed();
 		});
 		this.physics.add.collider(this.wallGroup, queenCoin, () => {
 
@@ -461,9 +464,11 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.hallsGroup, this.striker, () => {
 			this.striker.setVelocity(0, 0);
 			this.striker.disableInteractive();
+			this.physics.pause();
 			this.striker.setVisible(false);
 			strikerCollideWithHall = true;
-			if (!userTurn && nUserScore > 0) {
+
+			if (userTurn && nUserScore > 0) {
 				nUserScore--;
 				this.userScore.setText(nUserScore);
 				const whiteCoinCharge = this.physics.add.sprite(960, 547, "whiteCoin");
@@ -476,7 +481,7 @@ class Level extends Phaser.Scene {
 				this.container_whiteCoins.add(whiteCoinCharge);
 				this.whiteCoinGroup.add(whiteCoinCharge);
 			}
-			if (userTurn && nOpponentScore > 0) {
+			if (!userTurn && nOpponentScore > 0) {
 				nOpponentScore--;
 				this.opponentScore.setText(nOpponentScore);
 				const blackCoinCharge = this.physics.add.sprite(960, 547, "blackCoin");
@@ -485,17 +490,18 @@ class Level extends Phaser.Scene {
 				this.container_blackCoins.add(blackCoinCharge);
 				this.blackCoinGroup.add(blackCoinCharge);
 			}
-			this.checkSpeed();
+			// this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
 			coin.destroy();
 			nOpponentScore++;
 			this.opponentScore.setText(nOpponentScore);
-			if (userTurn) {
+
+			if (!userTurn) {
 				if (!strikerCollideWithHall) {
-					userTurn = false;
-					if (repeateOpponentTurn) {
+					repeateOpponentTurn = true;
+					if (opponentQueenFouls) {
 						userWin = false;
 						this.checkForWinner(userWin);
 					}
@@ -504,6 +510,7 @@ class Level extends Phaser.Scene {
 					strikerCollideWithHall = false;
 				}
 			}
+
 			console.log("black", userTurn);
 		});
 
@@ -512,10 +519,10 @@ class Level extends Phaser.Scene {
 			nUserScore++;
 			this.userScore.setText(nUserScore);
 
-			if (!userTurn) {
+			if (userTurn) {
 				if (!strikerCollideWithHall) {
-					userTurn = true;
-					if (repeateUserTurn) {
+					repeateUserTurn = true;
+					if (userQueenFouls) {
 						userWin = true;
 						this.checkForWinner(userWin);
 					}
@@ -525,13 +532,14 @@ class Level extends Phaser.Scene {
 					strikerCollideWithHall = false;
 				}
 			}
+
 			console.log("white", userTurn);
 		});
 
 		this.physics.add.collider(this.hallsGroup, queenCoin, (hall, coin) => {
 			if (userTurn) {
 				if (this.container_blackCoins.list.length == 1) {
-					repeateOpponentTurn = true;
+					opponentQueenFouls = true;
 					userTurn = false;
 				}
 				else {
@@ -541,7 +549,7 @@ class Level extends Phaser.Scene {
 			}
 			else {
 				if (this.container_whiteCoins.list.length == 1) {
-					repeateUserTurn = true;
+					userQueenFouls = true;
 					userTurn = true;
 				}
 				else {
@@ -552,13 +560,13 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
-			
-			this.checkSpeed();
+
+			// this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
-			
-			this.checkSpeed();
+
+			// this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.blackCoinGroup, () => {
@@ -575,7 +583,7 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
 
-			this.checkSpeed();
+			// this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.whiteCoinGroup, () => {
@@ -592,7 +600,6 @@ class Level extends Phaser.Scene {
 		this.slider.setInteractive();
 		this.input.setDraggable(this.slider);
 
-
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
 
 			if (gameObject.texture.key == "slider") {
@@ -605,33 +612,8 @@ class Level extends Phaser.Scene {
 
 		this.input.on('dragend', (pointer, GameObject) => {
 			this.strikeCoins();
-
 		});
-
 	}
-	// update() {
-	// 	let cursors = this.input.keyboard.createCursorKeys();
-
-	// 	if (cursors.left.isDown) {
-	// 		if (this.slider.x > -277) {
-	// 			this.slider.x -= 5;
-	// 		}
-	// 		this.striker.x = this.slider.x + 955;
-	// 	}
-	// 	if (cursors.right.isDown) {
-	// 		if (this.slider.x < 280) {
-	// 			this.slider.x += 5;
-	// 		}
-	// 		this.striker.x = this.slider.x + 955;
-	// 	}
-
-	// 	if (cursors.left.onUp) {
-	// 		this.strikeCoins();
-	// 	}
-	// 	if (cursors.right.) {
-	// 		this.strikeCoins();
-	// 	}
-	// }
 
 	strikeCoins() {
 		this.striker.setInteractive();
@@ -670,7 +652,7 @@ class Level extends Phaser.Scene {
 			}
 		});
 
-		this.input.on('dragend', (pointer, gameObject) => {
+		this.input.once('dragend', (pointer, gameObject) => {
 			this.arrow.setVisible(false);
 			if (gameObject.texture.key == "striker") {
 
@@ -700,6 +682,9 @@ class Level extends Phaser.Scene {
 				queenCoin.body.setBounce(1, 1);
 
 				this.physics.resume();
+				strikerCollideWithHall = false;
+				repeateUserTurn = false;
+				repeateOpponentTurn = false;
 				this.changeTurn();
 			}
 		});
@@ -707,66 +692,63 @@ class Level extends Phaser.Scene {
 	}
 
 	changeTurn() {
-		if (userTurn) {
-			userTurn = false;
+		let timeOut;
+		if (nStretchDistance < 150) {
+			timeOut = 2000;
 		}
-		else {
-			userTurn = true;
+		if (nStretchDistance > 150 && nStretchDistance < 200) {
+			timeOut = 2500;
 		}
-		strikerCollideWithHall = false;
+		if (nStretchDistance > 200) {
+			timeOut = 3200;
+		}
+		setTimeout(() => {
+			this.stopMovement();
+		}, timeOut);
 	}
 
-	checkSpeed(strikerCollideWithHall) {
+	stopMovement() {
 		// const strikerSpeed = Math.sqrt(this.striker.body.velocity.x ** 2 + this.striker.body.velocity.y ** 2);
-		if (this.striker.body.velocity.x < nStrikerThreshold && this.striker.body.velocity.y < nStrikerThreshold) {
+		// if (this.striker.body.velocity.x < nStrikerThreshold && this.striker.body.velocity.y < nStrikerThreshold) {
 
-			setTimeout(() => {
-				this.striker.body.setVelocity(0);
-				setTimeout(() => {
-					if (this.striker.visible == false) {
-						this.striker.setVisible(true);
-					}
-				}, 1200);
+		this.striker.body.setVelocity(0);
+		this.striker.setBounce(0);
+		this.striker.disableInteractive();
 
-				if (userTurn) {
-					setTimeout(() => {
-						this.striker.setPosition(680, 865);
-					}, 1200);
+		this.container_blackCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
+		this.container_whiteCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
+		queenCoin.body.setVelocity(0);
 
-					this.striker.setBounce(0);
-					this.striker.disableInteractive();
+		setTimeout(() => {
+			if (this.striker.visible == false) {
+				this.striker.setVisible(true);
+			}
+		}, 1200);
 
-					this.container_blackCoins.list.forEach((coin) => {
-						coin.body.setVelocity(0);
-					});
-					this.container_whiteCoins.list.forEach((coin) => {
-						coin.body.setVelocity(0);
-					});
-					queenCoin.body.setVelocity(0);
-					this.physics.pause();
-				}
-				else {
-					setTimeout(() => {
-						this.striker.setPosition(678, 223);
-					}, 1200);
-
-					this.striker.setBounce(0);
-					this.striker.disableInteractive();
-
-					this.container_blackCoins.list.forEach((coin) => {
-						coin.body.setVelocity(0);
-					});
-					this.container_whiteCoins.list.forEach((coin) => {
-						coin.body.setVelocity(0);
-					});
-					queenCoin.body.setVelocity(0);
-					this.physics.pause();
-				}
-				this.slider.setPosition(-286, -8);
-				this.slider.setInteractive();
-
-			}, 2000);
+		if (!repeateUserTurn && !repeateOpponentTurn) {
+			userTurn = !userTurn;
 		}
+
+		if (userTurn) {
+			setTimeout(() => {
+				this.striker.setPosition(680, 865);
+			}, 1200);
+		}
+		else {
+			setTimeout(() => {
+				this.striker.setPosition(678, 223);
+			}, 1200);
+		}
+
+		this.physics.pause();
+		this.slider.setPosition(-286, -8);
+		this.slider.setInteractive();
+		this.striker.setInteractive();
+		// }
 
 		this.container_blackCoins.list.forEach(function (coin) {
 			if (coin.body.velocity.x < nCoinsThreshold && coin.body.velocity.y < nCoinsThreshold) {
