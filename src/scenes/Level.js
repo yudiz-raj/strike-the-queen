@@ -460,31 +460,32 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.collider(this.hallsGroup, this.striker, () => {
 			this.striker.setVelocity(0, 0);
+			this.striker.disableInteractive();
 			this.striker.setVisible(false);
 			strikerCollideWithHall = true;
-			// if (!userTurn && nUserScore > 0) {
-			// 	nUserScore--;
-			// 	this.userScore.setText(nUserScore);
-			// 	const whiteCoinCharge = this.physics.add.sprite(960, 547, "whiteCoin");
-			// 	whiteCoinCharge.scaleX = 0.06;
-			// 	whiteCoinCharge.scaleY = 0.06;
-			// 	whiteCoinCharge.tintTopLeft = 14204307;
-			// 	whiteCoinCharge.tintTopRight = 14204307;
-			// 	whiteCoinCharge.tintBottomLeft = 14204307;
-			// 	whiteCoinCharge.tintBottomRight = 14204307;
-			// 	this.container_whiteCoins.add(whiteCoinCharge);
-			// 	this.whiteCoinGroup.add(whiteCoinCharge);
-			// }
-			// if (userTurn && nOpponentScore > 0) {
-			// 	nOpponentScore--;
-			// 	this.opponentScore.setText(nOpponentScore);
-			// 	const blackCoinCharge = this.physics.add.sprite(960, 547, "blackCoin");
-			// 	blackCoinCharge.scaleX = 0.08;
-			// 	blackCoinCharge.scaleY = 0.08;
-			// 	this.container_blackCoins.add(blackCoinCharge);
-			// 	this.blackCoinGroup.add(blackCoinCharge);
-			// }
-			this.checkSpeed(strikerCollideWithHall);
+			if (!userTurn && nUserScore > 0) {
+				nUserScore--;
+				this.userScore.setText(nUserScore);
+				const whiteCoinCharge = this.physics.add.sprite(960, 547, "whiteCoin");
+				whiteCoinCharge.scaleX = 0.06;
+				whiteCoinCharge.scaleY = 0.06;
+				whiteCoinCharge.tintTopLeft = 14204307;
+				whiteCoinCharge.tintTopRight = 14204307;
+				whiteCoinCharge.tintBottomLeft = 14204307;
+				whiteCoinCharge.tintBottomRight = 14204307;
+				this.container_whiteCoins.add(whiteCoinCharge);
+				this.whiteCoinGroup.add(whiteCoinCharge);
+			}
+			if (userTurn && nOpponentScore > 0) {
+				nOpponentScore--;
+				this.opponentScore.setText(nOpponentScore);
+				const blackCoinCharge = this.physics.add.sprite(960, 547, "blackCoin");
+				blackCoinCharge.scaleX = 0.08;
+				blackCoinCharge.scaleY = 0.08;
+				this.container_blackCoins.add(blackCoinCharge);
+				this.blackCoinGroup.add(blackCoinCharge);
+			}
+			this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
