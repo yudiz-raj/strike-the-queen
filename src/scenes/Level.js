@@ -142,44 +142,56 @@ class Level extends Phaser.Scene {
 		body.add(container_user);
 
 		// user_img
-		const user_img = this.add.image(0, 0, "user-img");
+		const user_img = this.add.image(-16, 588, "avatar_1");
 		container_user.add(user_img);
 
 		// userName
-		const userName = this.add.text(0, 160, "", {});
+		const userName = this.add.text(-16, 682, "", {});
 		userName.setOrigin(0.5, 0.5);
-		userName.text = "Player 1";
-		userName.setStyle({ "fontSize": "60px" });
+		userName.text = "Raj";
+		userName.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
 		container_user.add(userName);
 
 		// userScore
-		const userScore = this.add.text(0, 251, "", {});
+		const userScore = this.add.text(18, 750, "", {});
 		userScore.setOrigin(0.5, 0.5);
 		userScore.text = "0";
-		userScore.setStyle({ "fontSize": "60px" });
+		userScore.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
 		container_user.add(userScore);
+
+		// whiteCoin
+		const whiteCoin = this.add.image(-47, 750, "whiteCoin");
+		whiteCoin.scaleX = 2;
+		whiteCoin.scaleY = 2;
+		container_user.add(whiteCoin);
 
 		// container_opponent
 		const container_opponent = this.add.container(1684, 256);
 		body.add(container_opponent);
 
 		// opponent_img
-		const opponent_img = this.add.image(0, -13, "opponent-img");
+		const opponent_img = this.add.image(-6, -119, "avatar_2");
 		container_opponent.add(opponent_img);
 
 		// opponentName
-		const opponentName = this.add.text(0, 137, "", {});
+		const opponentName = this.add.text(-6, -19, "", {});
 		opponentName.setOrigin(0.5, 0.5);
-		opponentName.text = "Player 2";
-		opponentName.setStyle({ "fontSize": "60px" });
+		opponentName.text = "Fenil";
+		opponentName.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
 		container_opponent.add(opponentName);
 
 		// opponentScore
-		const opponentScore = this.add.text(0, 228, "", {});
+		const opponentScore = this.add.text(24, 49, "", {});
 		opponentScore.setOrigin(0.5, 0.5);
 		opponentScore.text = "0";
-		opponentScore.setStyle({ "fontSize": "60px" });
+		opponentScore.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
 		container_opponent.add(opponentScore);
+
+		// blackCoin
+		const blackCoin = this.add.image(-41, 49, "blackCoin");
+		blackCoin.scaleX = 2;
+		blackCoin.scaleY = 2;
+		container_opponent.add(blackCoin);
 
 		// container_whiteCoins
 		const container_whiteCoins = this.add.container(1455, 435);
@@ -192,6 +204,12 @@ class Level extends Phaser.Scene {
 		// container_queen
 		const container_queen = this.add.container(1455, 423);
 		body.add(container_queen);
+
+		// title
+		this.add.image(247, 383, "title");
+
+		// sound
+		this.add.image(1827, 1031, "sound");
 
 		this.container_walls = container_walls;
 		this.carrom_board = carrom_board;
@@ -233,168 +251,132 @@ class Level extends Phaser.Scene {
 
 		this.editorCreate();
 
-		this.striker = this.physics.add.sprite(680, 865, "striker").setScale(0.1, 0.1).setOrigin(0.5, 0.5);
-		this.striker.body.setCircle(this.striker.body.halfWidth - 20, 20, (this.striker.body.halfHeight - this.striker.body.halfWidth) + 20);
+		this.oSoundManager = new SoundManager(this);
+
+		this.striker = this.physics.add.sprite(680, 865, "striker").setScale(1.4).setOrigin(0.5, 0.5);
+		this.striker.body.setCircle(18, 1, 1);
 
 		this.arrow = this.add.image(this.striker.x, this.striker.y, "direction-arrow").setScale(0.7, 0.7).setOrigin(0.5, 0.6);
 		this.arrow.setVisible(false);
 
-		this.container_whiteCoins.setPosition(0, 8);
-		this.container_blackCoins.setPosition(0, 5);
-		this.container_queen.setPosition(0, -5);
+		// this.container_whiteCoins.setPosition(0, 8);
+		// this.container_blackCoins.setPosition(0, 5);
+		// this.container_queen.setPosition(0, -5);
+
 
 		// whiteCoin_1
-		const whiteCoin_1 = this.add.sprite(897, 511, "whiteCoin");
-		whiteCoin_1.scaleX = 0.06;
-		whiteCoin_1.scaleY = 0.06;
-		whiteCoin_1.tintTopLeft = 14204307;
-		whiteCoin_1.tintTopRight = 14204307;
-		whiteCoin_1.tintBottomLeft = 14204307;
-		whiteCoin_1.tintBottomRight = 14204307;
+		const whiteCoin_1 = this.add.sprite(-495, 177, "whiteCoin");
+		whiteCoin_1.scaleX = 1.3;
+		whiteCoin_1.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_1);
 
 		// whiteCoin_2
-		const whiteCoin_2 = this.add.sprite(925, 535, "whiteCoin");
-		whiteCoin_2.scaleX = 0.06;
-		whiteCoin_2.scaleY = 0.06;
-		whiteCoin_2.tintTopLeft = 14204307;
-		whiteCoin_2.tintTopRight = 14204307;
-		whiteCoin_2.tintBottomLeft = 14204307;
-		whiteCoin_2.tintBottomRight = 14204307;
+		const whiteCoin_2 = this.add.sprite(-434, 72, "whiteCoin");
+		whiteCoin_2.scaleX = 1.3;
+		whiteCoin_2.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_2);
 
 		// whiteCoin_3
-		const whiteCoin_3 = this.add.sprite(1026, 527, "whiteCoin");
-		whiteCoin_3.scaleX = 0.06;
-		whiteCoin_3.scaleY = 0.06;
-		whiteCoin_3.tintTopLeft = 14204307;
-		whiteCoin_3.tintTopRight = 14204307;
-		whiteCoin_3.tintBottomLeft = 14204307;
-		whiteCoin_3.tintBottomRight = 14204307;
+		const whiteCoin_3 = this.add.sprite(-481, 74, "whiteCoin");
+		whiteCoin_3.scaleX = 1.3;
+		whiteCoin_3.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_3);
 
 		// whiteCoin_4
-		const whiteCoin_4 = this.add.sprite(995, 535, "whiteCoin");
-		whiteCoin_4.scaleX = 0.06;
-		whiteCoin_4.scaleY = 0.06;
-		whiteCoin_4.tintTopLeft = 14204307;
-		whiteCoin_4.tintTopRight = 14204307;
-		whiteCoin_4.tintBottomLeft = 14204307;
-		whiteCoin_4.tintBottomRight = 14204307;
+		const whiteCoin_4 = this.add.sprite(-434, 141, "whiteCoin");
+		whiteCoin_4.scaleX = 1.3;
+		whiteCoin_4.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_4);
 
 		// whiteCoin_5
-		const whiteCoin_5 = this.add.sprite(937, 469, "whiteCoin");
-		whiteCoin_5.scaleX = 0.06;
-		whiteCoin_5.scaleY = 0.06;
-		whiteCoin_5.tintTopLeft = 14204307;
-		whiteCoin_5.tintTopRight = 14204307;
-		whiteCoin_5.tintBottomLeft = 14204307;
-		whiteCoin_5.tintBottomRight = 14204307;
+		const whiteCoin_5 = this.add.sprite(-554, 72, "whiteCoin");
+		whiteCoin_5.scaleX = 1.3;
+		whiteCoin_5.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_5);
 
 		// whiteCoin_6
-		const whiteCoin_6 = this.add.sprite(1007, 581, "whiteCoin");
-		whiteCoin_6.scaleX = 0.06;
-		whiteCoin_6.scaleY = 0.06;
-		whiteCoin_6.tintTopLeft = 14204307;
-		whiteCoin_6.tintTopRight = 14204307;
-		whiteCoin_6.tintBottomLeft = 14204307;
-		whiteCoin_6.tintBottomRight = 14204307;
+		const whiteCoin_6 = this.add.sprite(-495, 37, "whiteCoin");
+		whiteCoin_6.scaleX = 1.3;
+		whiteCoin_6.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_6);
 
 		// whiteCoin_7
-		const whiteCoin_7 = this.add.sprite(995, 478, "whiteCoin");
-		whiteCoin_7.scaleX = 0.06;
-		whiteCoin_7.scaleY = 0.06;
-		whiteCoin_7.tintTopLeft = 14204307;
-		whiteCoin_7.tintTopRight = 14204307;
-		whiteCoin_7.tintBottomLeft = 14204307;
-		whiteCoin_7.tintBottomRight = 14204307;
+		const whiteCoin_7 = this.add.sprite(-554, 141, "whiteCoin");
+		whiteCoin_7.scaleX = 1.3;
+		whiteCoin_7.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_7);
 
 		// whiteCoin_8
-		const whiteCoin_8 = this.add.sprite(952, 601, "whiteCoin");
-		whiteCoin_8.scaleX = 0.06;
-		whiteCoin_8.scaleY = 0.06;
-		whiteCoin_8.tintTopLeft = 14204307;
-		whiteCoin_8.tintTopRight = 14204307;
-		whiteCoin_8.tintBottomLeft = 14204307;
-		whiteCoin_8.tintBottomRight = 14204307;
+		const whiteCoin_8 = this.add.sprite(-532, 108, "whiteCoin");
+		whiteCoin_8.scaleX = 1.3;
+		whiteCoin_8.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_8);
 
 		// whiteCoin_9
-		const whiteCoin_9 = this.add.sprite(904, 568, "whiteCoin");
-		whiteCoin_9.scaleX = 0.06;
-		whiteCoin_9.scaleY = 0.06;
-		whiteCoin_9.tintTopLeft = 14204307;
-		whiteCoin_9.tintTopRight = 14204307;
-		whiteCoin_9.tintBottomLeft = 14204307;
-		whiteCoin_9.tintBottomRight = 14204307;
+		const whiteCoin_9 = this.add.sprite(-476, 137, "whiteCoin");
+		whiteCoin_9.scaleX = 1.3;
+		whiteCoin_9.scaleY = 1.3;
 		this.container_whiteCoins.add(whiteCoin_9);
 
+
 		// blackCoin_1
-		const blackCoin_1 = this.add.sprite(913, 489, "blackCoin");
-		blackCoin_1.scaleX = 0.08;
-		blackCoin_1.scaleY = 0.08;
+		const blackCoin_1 = this.add.sprite(-515, 79, "blackCoin");
+		blackCoin_1.scaleX = 1.3;
+		blackCoin_1.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_1);
 
 		// blackCoin_2
-		const blackCoin_2 = this.add.sprite(1023, 559, "blackCoin");
-		blackCoin_2.scaleX = 0.08;
-		blackCoin_2.scaleY = 0.08;
+		const blackCoin_2 = this.add.sprite(-424, 109, "blackCoin");
+		blackCoin_2.scaleX = 1.3;
+		blackCoin_2.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_2);
 
 		// blackCoin_3
-		const blackCoin_3 = this.add.sprite(960, 504, "blackCoin");
-		blackCoin_3.scaleX = 0.08;
-		blackCoin_3.scaleY = 0.08;
+		const blackCoin_3 = this.add.sprite(-530, 48, "blackCoin");
+		blackCoin_3.scaleX = 1.3;
+		blackCoin_3.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_3);
 
 		// blackCoin_4
-		const blackCoin_4 = this.add.sprite(1015, 503, "blackCoin");
-		blackCoin_4.scaleX = 0.08;
-		blackCoin_4.scaleY = 0.08;
+		const blackCoin_4 = this.add.sprite(-566, 109, "blackCoin");
+		blackCoin_4.scaleX = 1.3;
+		blackCoin_4.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_4);
 
 		// blackCoin_5
-		const blackCoin_5 = this.add.sprite(960, 574, "blackCoin");
-		blackCoin_5.scaleX = 0.08;
-		blackCoin_5.scaleY = 0.08;
+		const blackCoin_5 = this.add.sprite(-511, 142, "blackCoin");
+		blackCoin_5.scaleX = 1.3;
+		blackCoin_5.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_5);
 
 		// blackCoin_6
-		const blackCoin_6 = this.add.sprite(982, 600, "blackCoin");
-		blackCoin_6.scaleX = 0.08;
-		blackCoin_6.scaleY = 0.08;
+		const blackCoin_6 = this.add.sprite(-531, 172, "blackCoin");
+		blackCoin_6.scaleX = 1.3;
+		blackCoin_6.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_6);
 
 		// blackCoin_7
-		const blackCoin_7 = this.add.sprite(894, 543, "blackCoin");
-		blackCoin_7.scaleX = 0.08;
-		blackCoin_7.scaleY = 0.08;
+		const blackCoin_7 = this.add.sprite(-459, 171, "blackCoin");
+		blackCoin_7.scaleX = 1.3;
+		blackCoin_7.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_7);
 
 		// blackCoin_8
-		const blackCoin_8 = this.add.sprite(925, 592, "blackCoin");
-		blackCoin_8.scaleX = 0.08;
-		blackCoin_8.scaleY = 0.08;
+		const blackCoin_8 = this.add.sprite(-460, 49, "blackCoin");
+		blackCoin_8.scaleX = 1.3;
+		blackCoin_8.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_8);
 
 		// blackCoin_9
-		const blackCoin_9 = this.add.sprite(967, 470, "blackCoin");
-		blackCoin_9.scaleX = 0.08;
-		blackCoin_9.scaleY = 0.08;
+		const blackCoin_9 = this.add.sprite(-460, 107, "blackCoin");
+		blackCoin_9.scaleX = 1.3;
+		blackCoin_9.scaleY = 1.3;
 		this.container_blackCoins.add(blackCoin_9);
 
 		// queenCoin
-		queenCoin = this.add.image(960, 547, "whiteCoin");
-		queenCoin.scaleX = 0.06;
-		queenCoin.scaleY = 0.06;
-		queenCoin.tintTopLeft = 15794176;
-		queenCoin.tintTopRight = 15794176;
-		queenCoin.tintBottomLeft = 15794176;
-		queenCoin.tintBottomRight = 15794176;
+		queenCoin = this.add.sprite(-495, 119, "redCoin");
+		queenCoin.scaleX = 1.3;
+		queenCoin.scaleY = 1.3;
 		this.container_queen.add(queenCoin);
 
 		this.hallsGroup = this.add.group();
@@ -417,16 +399,18 @@ class Level extends Phaser.Scene {
 
 		this.container_whiteCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
-			coin.body.setCircle(260, 0, (coin.body.halfHeight - coin.body.halfWidth));
+			coin.body.setCircle(13, 2, 1);
 			this.whiteCoinGroup.add(coin);
 		});
 
 		this.container_blackCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
-			coin.body.setCircle(200, 0, (coin.body.halfHeight - coin.body.halfWidth));
-			coin.body.setOffset(60, 25);
+			coin.body.setCircle(13, 2, 1);
 			this.blackCoinGroup.add(coin);
 		});
+
+		this.physics.add.existing(queenCoin, false);
+		queenCoin.body.setCircle(13, 2, 1);
 
 		this.container_halls.list.forEach((hall) => {
 			this.physics.add.existing(hall, true);
@@ -434,12 +418,7 @@ class Level extends Phaser.Scene {
 			this.hallsGroup.add(hall);
 		})
 
-		this.physics.add.existing(queenCoin, false);
-		queenCoin.body.setCircle(260, 0, (queenCoin.body.halfHeight - queenCoin.body.halfWidth));
 		this.setCollider();
-		let cursors = this.input.keyboard.createCursorKeys();
-		// this.input.keyboard.on('keydown', this.setStrikerPosition, this);
-		this.strikeCoins();
 		this.setStrikerPosition();
 
 	}
@@ -447,18 +426,18 @@ class Level extends Phaser.Scene {
 	setCollider() {
 
 		this.physics.add.collider(this.wallGroup, this.striker, () => {
-			// this.checkSpeed();
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
 		});
 		this.physics.add.collider(this.wallGroup, queenCoin, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.whiteCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.blackCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
 		});
 
 		this.physics.add.collider(this.hallsGroup, this.striker, () => {
@@ -467,30 +446,26 @@ class Level extends Phaser.Scene {
 			this.physics.pause();
 			this.striker.setVisible(false);
 			strikerCollideWithHall = true;
+			this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 
 			if (userTurn && nUserScore > 0) {
 				nUserScore--;
 				this.userScore.setText(nUserScore);
-				const whiteCoinCharge = this.physics.add.sprite(960, 547, "whiteCoin");
-				whiteCoinCharge.scaleX = 0.06;
-				whiteCoinCharge.scaleY = 0.06;
-				whiteCoinCharge.tintTopLeft = 14204307;
-				whiteCoinCharge.tintTopRight = 14204307;
-				whiteCoinCharge.tintBottomLeft = 14204307;
-				whiteCoinCharge.tintBottomRight = 14204307;
+				const whiteCoinCharge = this.physics.add.sprite(-495, 177, "whiteCoin");
+				whiteCoinCharge.scaleX = 1.3;
+				whiteCoinCharge.scaleY = 1.3;
 				this.container_whiteCoins.add(whiteCoinCharge);
 				this.whiteCoinGroup.add(whiteCoinCharge);
 			}
 			if (!userTurn && nOpponentScore > 0) {
 				nOpponentScore--;
 				this.opponentScore.setText(nOpponentScore);
-				const blackCoinCharge = this.physics.add.sprite(960, 547, "blackCoin");
-				blackCoinCharge.scaleX = 0.08;
-				blackCoinCharge.scaleY = 0.08;
+				const blackCoinCharge = this.add.sprite(-459, 171, "blackCoin");
+				blackCoinCharge.scaleX = 1.3;
+				blackCoinCharge.scaleY = 1.3;
 				this.container_blackCoins.add(blackCoinCharge);
 				this.blackCoinGroup.add(blackCoinCharge);
 			}
-			// this.checkSpeed();
 		});
 
 		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
@@ -499,6 +474,7 @@ class Level extends Phaser.Scene {
 			this.opponentScore.setText(nOpponentScore);
 
 			if (!userTurn) {
+				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 				if (!strikerCollideWithHall) {
 					repeateOpponentTurn = true;
 					if (opponentQueenFouls) {
@@ -510,6 +486,9 @@ class Level extends Phaser.Scene {
 					strikerCollideWithHall = false;
 				}
 			}
+			else{
+				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
+			}
 
 			console.log("black", userTurn);
 		});
@@ -520,6 +499,7 @@ class Level extends Phaser.Scene {
 			this.userScore.setText(nUserScore);
 
 			if (userTurn) {
+				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 				if (!strikerCollideWithHall) {
 					repeateUserTurn = true;
 					if (userQueenFouls) {
@@ -532,6 +512,9 @@ class Level extends Phaser.Scene {
 					strikerCollideWithHall = false;
 				}
 			}
+			else{
+				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
+			}
 
 			console.log("white", userTurn);
 		});
@@ -539,20 +522,24 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.hallsGroup, queenCoin, (hall, coin) => {
 			if (userTurn) {
 				if (this.container_blackCoins.list.length == 1) {
+					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 					opponentQueenFouls = true;
 					userTurn = false;
 				}
 				else {
+					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
 			}
 			else {
 				if (this.container_whiteCoins.list.length == 1) {
+					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 					userQueenFouls = true;
 					userTurn = true;
 				}
 				else {
+					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -560,38 +547,35 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
-
-			// this.checkSpeed();
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
-
-			// this.checkSpeed();
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.blackCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(queenCoin, this.blackCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(queenCoin, this.whiteCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
-
-			// this.checkSpeed();
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.whiteCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.blackCoinGroup, () => {
-
+			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 	}

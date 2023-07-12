@@ -233,18 +233,22 @@
                             "label": "user_img",
                             "components": [],
                             "texture": {
-                                "key": "user-img"
-                            }
+                                "key": "avatar_1"
+                            },
+                            "x": -16,
+                            "y": 588
                         },
                         {
                             "type": "Text",
                             "id": "f49fd189-45df-4293-8d54-52615e9476e5",
                             "label": "userName",
                             "components": [],
-                            "y": 160,
+                            "x": -16,
+                            "y": 682,
                             "originX": 0.5,
                             "originY": 0.5,
-                            "text": "Player 1",
+                            "text": "Raj",
+                            "fontFamily": "GochiHand",
                             "fontSize": "60px"
                         },
                         {
@@ -253,11 +257,26 @@
                             "label": "userScore",
                             "scope": "CLASS",
                             "components": [],
-                            "y": 251,
+                            "x": 18,
+                            "y": 750,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "0",
+                            "fontFamily": "GochiHand",
                             "fontSize": "60px"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "f1bbab5b-b8dd-488a-be52-85c8783d01d2",
+                            "label": "whiteCoin",
+                            "components": [],
+                            "texture": {
+                                "key": "whiteCoin"
+                            },
+                            "x": -47,
+                            "y": 750,
+                            "scaleX": 2,
+                            "scaleY": 2
                         }
                     ]
                 },
@@ -275,19 +294,22 @@
                             "label": "opponent_img",
                             "components": [],
                             "texture": {
-                                "key": "opponent-img"
+                                "key": "avatar_2"
                             },
-                            "y": -13
+                            "x": -6,
+                            "y": -119
                         },
                         {
                             "type": "Text",
                             "id": "dabef105-0590-4913-b4f9-b43137b06f89",
                             "label": "opponentName",
                             "components": [],
-                            "y": 137,
+                            "x": -6,
+                            "y": -19,
                             "originX": 0.5,
                             "originY": 0.5,
-                            "text": "Player 2",
+                            "text": "Fenil",
+                            "fontFamily": "GochiHand",
                             "fontSize": "60px"
                         },
                         {
@@ -296,11 +318,26 @@
                             "label": "opponentScore",
                             "scope": "CLASS",
                             "components": [],
-                            "y": 228,
+                            "x": 24,
+                            "y": 49,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "0",
+                            "fontFamily": "GochiHand",
                             "fontSize": "60px"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "6920ca81-73cc-440b-9469-ac8327e53cb2",
+                            "label": "blackCoin",
+                            "components": [],
+                            "texture": {
+                                "key": "blackCoin"
+                            },
+                            "x": -41,
+                            "y": 49,
+                            "scaleX": 2,
+                            "scaleY": 2
                         }
                     ]
                 },
@@ -335,6 +372,28 @@
                     "list": []
                 }
             ]
+        },
+        {
+            "type": "Image",
+            "id": "4fdb6c90-4345-4649-840a-794e9ea0ef84",
+            "label": "title",
+            "components": [],
+            "texture": {
+                "key": "title"
+            },
+            "x": 247,
+            "y": 383
+        },
+        {
+            "type": "Image",
+            "id": "bc438307-4ae8-4ca3-9cd5-e327fcc45c68",
+            "label": "sound",
+            "components": [],
+            "texture": {
+                "key": "sound"
+            },
+            "x": 1827,
+            "y": 1031
         }
     ],
     "plainObjects": [],
