@@ -3,9 +3,6 @@ let nStretchDistance;
 let nMaxStretch = 1000;
 let nVelocityX, nVelocityY, angle;
 let queenCoin;
-let speedTimer;
-let nStrikerThreshold = 20;
-let nCoinsThreshold = 40;
 let userTurn = true;
 let strikerCollideWithHall = false;
 let repeateUserTurn = false;
@@ -80,6 +77,10 @@ class Level extends Phaser.Scene {
 		carrom_board.scaleX = 2;
 		carrom_board.scaleY = 2;
 		container_background.add(carrom_board);
+
+		// title
+		const title = this.add.image(247, 379, "title");
+		container_background.add(title);
 
 		// container_halls
 		const container_halls = this.add.container(0, 0);
@@ -205,12 +206,6 @@ class Level extends Phaser.Scene {
 		const container_queen = this.add.container(1455, 423);
 		body.add(container_queen);
 
-		// title
-		this.add.image(247, 383, "title");
-
-		// sound
-		this.add.image(1827, 1031, "sound");
-
 		this.container_walls = container_walls;
 		this.carrom_board = carrom_board;
 		this.container_halls = container_halls;
@@ -247,6 +242,61 @@ class Level extends Phaser.Scene {
 
 	// Write your code here
 
+	changeTurn() {
+		let timeOut;
+		if (nStretchDistance < 150) {
+			timeOut = 2000;
+		}
+		if (nStretchDistance > 150 && nStretchDistance < 200) {
+			timeOut = 2500;
+		}
+		if (nStretchDistance > 200) {
+			timeOut = 3200;
+		}
+		setTimeout(() => {
+			this.stopMovement();
+		}, timeOut);
+	}
+
+	checkForWinner(userWin) {
+		if (userWin == true) {
+			const winText = this.add.image(960, 500, "text-win").setScale(0, 1);
+			this.tweens.add({
+				targets: winText,
+				ease: "power3",
+				scaleX: 1,
+				duration: 2000,
+				onComplete: () => {
+					this.reloadSceen();
+				}
+			});
+		}
+		else {
+			const loseText = this.add.image(960, 500, "text-lose").setScale(0, 1);
+			this.tweens.add({
+				targets: loseText,
+				ease: "power3",
+				scaleX: 1,
+				duration: 2000,
+				onComplete: () => {
+					this.reloadSceen();
+				}
+			});
+		}
+	}
+
+	reloadSceen() {
+		this.striker.disableInteractive();
+		this.slider.disableInteractive();
+		const tryAgainText = this.add.text(960, 600, "", {});
+		tryAgainText.setOrigin(0.5, 0.5);
+		tryAgainText.text = "Try again";
+		tryAgainText.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px", "fontStyle": "bold", "color": "#553636ff" });
+		tryAgainText.setInteractive().on("pointerdown", () => {
+			this.scene.restart("Level");
+		});
+	}
+
 	create() {
 
 		this.editorCreate();
@@ -258,11 +308,6 @@ class Level extends Phaser.Scene {
 
 		this.arrow = this.add.image(this.striker.x, this.striker.y, "direction-arrow").setScale(0.7, 0.7).setOrigin(0.5, 0.6);
 		this.arrow.setVisible(false);
-
-		// this.container_whiteCoins.setPosition(0, 8);
-		// this.container_blackCoins.setPosition(0, 5);
-		// this.container_queen.setPosition(0, -5);
-
 
 		// whiteCoin_1
 		const whiteCoin_1 = this.add.sprite(-495, 177, "whiteCoin");
@@ -449,7 +494,18 @@ class Level extends Phaser.Scene {
 			this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 
 			if (userTurn && nUserScore > 0) {
-				nUserScore--;
+				if (repeateUserTurn) {
+					nUserScore -= 2;
+					const whiteCoinCharge = this.physics.add.sprite(-495, 177, "whiteCoin");
+					whiteCoinCharge.scaleX = 1.3;
+					whiteCoinCharge.scaleY = 1.3;
+					this.container_whiteCoins.add(whiteCoinCharge);
+					this.whiteCoinGroup.add(whiteCoinCharge);
+					repeateUserTurn = false;
+				}
+				else {
+					nUserScore--;
+				}
 				this.userScore.setText(nUserScore);
 				const whiteCoinCharge = this.physics.add.sprite(-495, 177, "whiteCoin");
 				whiteCoinCharge.scaleX = 1.3;
@@ -458,9 +514,20 @@ class Level extends Phaser.Scene {
 				this.whiteCoinGroup.add(whiteCoinCharge);
 			}
 			if (!userTurn && nOpponentScore > 0) {
-				nOpponentScore--;
+				if (repeateOpponentTurn) {
+					nOpponentScore -= 2;
+					const blackCoinCharge = this.physics.add.sprite(-495, 177, "blackCoin");
+					blackCoinCharge.scaleX = 1.3;
+					blackCoinCharge.scaleY = 1.3;
+					this.container_blackCoins.add(blackCoinCharge);
+					this.blackCoinGroup.add(blackCoinCharge);
+					repeateOpponentTurn = false;
+				}
+				else{
+					nOpponentScore--;
+				}
 				this.opponentScore.setText(nOpponentScore);
-				const blackCoinCharge = this.add.sprite(-459, 171, "blackCoin");
+				const blackCoinCharge = this.physics.add.sprite(-495, 177, "blackCoin");
 				blackCoinCharge.scaleX = 1.3;
 				blackCoinCharge.scaleY = 1.3;
 				this.container_blackCoins.add(blackCoinCharge);
@@ -477,20 +544,20 @@ class Level extends Phaser.Scene {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 				if (!strikerCollideWithHall) {
 					repeateOpponentTurn = true;
+					if (repeateUserTurn) {
+						repeateOpponentTurn = false;
+					}
 					if (opponentQueenFouls) {
 						userWin = false;
 						this.checkForWinner(userWin);
 					}
-					// repeateOpponentTurn = true;
 				} else {
 					strikerCollideWithHall = false;
 				}
 			}
-			else{
+			else {
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 			}
-
-			console.log("black", userTurn);
 		});
 
 		this.physics.add.collider(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
@@ -502,32 +569,37 @@ class Level extends Phaser.Scene {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 				if (!strikerCollideWithHall) {
 					repeateUserTurn = true;
+					if (repeateOpponentTurn) {
+						repeateUserTurn = false;
+					}
 					if (userQueenFouls) {
 						userWin = true;
 						this.checkForWinner(userWin);
 					}
-					// repeateUserTurn = true;
 				}
 				else {
 					strikerCollideWithHall = false;
 				}
 			}
-			else{
+			else {
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 			}
-
-			console.log("white", userTurn);
 		});
 
 		this.physics.add.collider(this.hallsGroup, queenCoin, (hall, coin) => {
-			if (userTurn) {
+			if (!userTurn) {
 				if (this.container_blackCoins.list.length == 1) {
+					queenCoin.setVisible(false);
 					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 					opponentQueenFouls = true;
-					userTurn = false;
+					repeateOpponentTurn = true;
+					setTimeout(() => {
+						queenCoin.setPosition(-495, 119).setVisible(true);
+					}, 4000);
 				}
 				else {
 					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
+					queenCoin.setVisible(false);
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
@@ -535,11 +607,16 @@ class Level extends Phaser.Scene {
 			else {
 				if (this.container_whiteCoins.list.length == 1) {
 					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
+					queenCoin.setVisible(false);
 					userQueenFouls = true;
-					userTurn = true;
+					repeateUserTurn = true;
+					setTimeout(() => {
+						queenCoin.setPosition(-495, 119).setVisible(true);
+					}, 4000);
 				}
 				else {
 					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
+					queenCoin.setVisible(false);
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -675,25 +752,7 @@ class Level extends Phaser.Scene {
 
 	}
 
-	changeTurn() {
-		let timeOut;
-		if (nStretchDistance < 150) {
-			timeOut = 2000;
-		}
-		if (nStretchDistance > 150 && nStretchDistance < 200) {
-			timeOut = 2500;
-		}
-		if (nStretchDistance > 200) {
-			timeOut = 3200;
-		}
-		setTimeout(() => {
-			this.stopMovement();
-		}, timeOut);
-	}
-
 	stopMovement() {
-		// const strikerSpeed = Math.sqrt(this.striker.body.velocity.x ** 2 + this.striker.body.velocity.y ** 2);
-		// if (this.striker.body.velocity.x < nStrikerThreshold && this.striker.body.velocity.y < nStrikerThreshold) {
 
 		this.striker.body.setVelocity(0);
 		this.striker.setBounce(0);
@@ -732,33 +791,6 @@ class Level extends Phaser.Scene {
 		this.slider.setPosition(-286, -8);
 		this.slider.setInteractive();
 		this.striker.setInteractive();
-		// }
-
-		this.container_blackCoins.list.forEach(function (coin) {
-			if (coin.body.velocity.x < nCoinsThreshold && coin.body.velocity.y < nCoinsThreshold) {
-				coin.body.setVelocity(0);
-			}
-		}, this);
-
-		this.container_whiteCoins.list.forEach(function (coin) {
-			if (coin.body.velocity.x < nCoinsThreshold && coin.body.velocity.y < nCoinsThreshold) {
-				coin.body.setVelocity(0);
-			}
-		}, this);
-
-		if (queenCoin.body.velocity.x < nCoinsThreshold && queenCoin.body.velocity.y < nCoinsThreshold) {
-			queenCoin.body.setVelocity(0);
-		}
-	}
-
-	checkForWinner(userWin) {
-		if (userWin == true) {
-			console.log("you win");
-		}
-		else {
-			console.log("batter luck, next time");
-		}
-		this.scene.restart("Level");
 	}
 	/* END-USER-CODE */
 }

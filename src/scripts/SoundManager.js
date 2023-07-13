@@ -1,7 +1,7 @@
 class SoundManager {
     constructor(oScene) {
         this.oScene = oScene;
-        // this.clickSound = this.oScene.sound.add("Click");
+        this.clickSound = this.oScene.sound.add("click");
         this.coinCollideSound = this.oScene.sound.add("coinsCollide");
         this.coinCollideWallSound = this.oScene.sound.add("coinsCollideWall");
         this.wrongCoinFoulsSound = this.oScene.sound.add("wrongCoinFouls");

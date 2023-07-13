@@ -88,11 +88,6 @@
                 "key": "opponent-img"
             },
             {
-                "url": "assets/images/pointer.png",
-                "type": "image",
-                "key": "pointer"
-            },
-            {
                 "url": "assets/images/redCoin.png",
                 "type": "image",
                 "key": "redCoin"
@@ -118,11 +113,6 @@
                 "url": "src/scripts/SocketManager.js",
                 "type": "script",
                 "key": "SocketManager"
-            },
-            {
-                "url": "assets/images/sound.png",
-                "type": "image",
-                "key": "sound"
             },
             {
                 "url": "src/scripts/SoundManager.js",

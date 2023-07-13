@@ -43,6 +43,11 @@ class Loading extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+		this.oSoundManager = new SoundManager(this);
+
+		this.input.on("pointerdown", ()=>{
+			this.oSoundManager.playSound(this.oSoundManager.clickSound, false);			
+		},this);
 
 		this.start_button.setInteractive().on("pointerdown", () => {
 			this.scene.stop("Loading");
