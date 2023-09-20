@@ -1,0 +1,76 @@
+{
+    "id": "dac555fd-eef3-43ba-84d8-7f33ac46cae6",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "a12243aa-f012-443e-8ad9-9c2051b35cb4",
+            "label": "container_1",
+            "y": -143,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "ede740c1-440e-44ef-b126-8208c9d576bd",
+                    "label": "redCoin",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "redCoin"
+                    },
+                    "x": 385,
+                    "y": 68,
+                    "angle": 20
+                },
+                {
+                    "type": "Image",
+                    "id": "983a6a66-de6d-4ff3-ae1f-b542af9011dd",
+                    "label": "blackCoin",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "blackCoin"
+                    },
+                    "x": 349,
+                    "y": 36,
+                    "scaleX": 1.2,
+                    "scaleY": 1.2
+                },
+                {
+                    "type": "Image",
+                    "id": "0335d82d-e8e5-44f5-80ef-3d4f5dbe695a",
+                    "label": "whiteCoin",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "whiteCoin"
+                    },
+                    "x": 411,
+                    "y": 60,
+                    "scaleX": 1.2,
+                    "scaleY": 1.2,
+                    "angle": 45
+                },
+                {
+                    "type": "Image",
+                    "id": "cf1c5a0f-b9bf-4fc4-aac6-d4a9f1cf4cf7",
+                    "label": "logo",
+                    "texture": {
+                        "key": "logo"
+                    },
+                    "y": 143
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 4
+    }
+}

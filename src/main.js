@@ -11,7 +11,7 @@ const init = () => {
 		width: 1920,
 		height: 1080,
 		type: Phaser.AUTO,
-		backgroundColor: "#242424",
+		transparent: true,
 		parent: "game-division",
 		scale: {
 			mode: Phaser.Scale.FIT,
@@ -27,7 +27,7 @@ const init = () => {
 			default: "arcade",
 			arcade: {
 				gravity: { y: 0 },
-				debug: false
+				debug: true
 			}
 		}
 	});

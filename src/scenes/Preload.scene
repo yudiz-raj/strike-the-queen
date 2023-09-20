@@ -13,19 +13,6 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "50b1236c-46cf-4475-bc66-85abed95fd5d",
-            "label": "loading_img",
-            "components": [],
-            "texture": {
-                "key": "loading-img"
-            },
-            "x": 960,
-            "y": 540,
-            "scaleX": 4,
-            "scaleY": 4
-        },
-        {
             "type": "Text",
             "id": "2ce42443-5227-4c9b-b498-e81f9a21cde3",
             "label": "progress",
@@ -33,11 +20,78 @@
                 "PreloadText"
             ],
             "x": 960,
-            "y": 540,
+            "y": 819,
             "originX": 0.5,
             "originY": 0.5,
+            "visible": false,
             "text": "0%",
             "fontSize": "54px"
+        },
+        {
+            "type": "Image",
+            "id": "93261608-7eed-444c-bbdd-390d8cf79d69",
+            "label": "splash_screen",
+            "texture": {
+                "key": "splash_screen"
+            },
+            "x": 960,
+            "y": 540
+        },
+        {
+            "type": "Image",
+            "id": "d68ab263-f078-4678-b5f8-03bebc8659d8",
+            "label": "loading_bar",
+            "scope": "CLASS",
+            "texture": {
+                "key": "loading_bar"
+            },
+            "x": 960,
+            "y": 1000
+        },
+        {
+            "type": "Image",
+            "id": "abb122a0-4a7d-422c-aa98-be986e0355e1",
+            "label": "innerBar",
+            "scope": "CLASS",
+            "texture": {
+                "key": "loading"
+            },
+            "x": 705,
+            "y": 1000,
+            "originX": 0,
+            "visible": false
+        },
+        {
+            "prefabId": "dac555fd-eef3-43ba-84d8-7f33ac46cae6",
+            "id": "0f76e627-f240-452e-96a9-de663ba68618",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "logoPrefab",
+            "scope": "CLASS",
+            "x": 961,
+            "y": 371
+        },
+        {
+            "type": "Text",
+            "id": "8bf08443-bcd1-40cf-89c7-1dfb87386064",
+            "label": "text_1",
+            "x": 724,
+            "y": 932,
+            "text": "Loading...",
+            "fontFamily": "Montserrat",
+            "fontSize": "42px"
+        },
+        {
+            "type": "Text",
+            "id": "6c151de8-4663-4084-8a91-7a0ff6510623",
+            "label": "txt_progress",
+            "scope": "CLASS",
+            "x": 936,
+            "y": 932,
+            "fontFamily": "Montserrat",
+            "fontSize": "42px"
         }
     ],
     "plainObjects": [],
@@ -45,6 +99,6 @@
         "app": "Phaser Editor 2D - Scene Editor",
         "url": "https://phasereditor2d.com",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 4
     }
 }

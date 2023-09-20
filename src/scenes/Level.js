@@ -34,164 +34,155 @@ class Level extends Phaser.Scene {
 		const container_background = this.add.container(0, 1);
 		body.add(container_background);
 
-		// background_img
-		const background_img = this.add.image(960, 539, "background-img");
-		container_background.add(background_img);
-
 		// container_walls
 		const container_walls = this.add.container(0, 0);
 		container_background.add(container_walls);
 
 		// wall_1
-		const wall_1 = this.add.rectangle(501, 534, 128, 128);
+		const wall_1 = this.add.rectangle(621, 534, 128, 128);
 		wall_1.scaleX = 0.2;
 		wall_1.scaleY = 7;
-		wall_1.isFilled = true;
 		container_walls.add(wall_1);
 
 		// wall_2
-		const wall_2 = this.add.rectangle(966, 79, 128, 128);
+		const wall_2 = this.add.rectangle(966, 179, 128, 128);
 		wall_2.scaleX = 0.2;
 		wall_2.scaleY = 7;
 		wall_2.angle = 90;
-		wall_2.isFilled = true;
 		container_walls.add(wall_2);
 
 		// wall_3
-		const wall_3 = this.add.rectangle(1424, 540, 128, 128);
+		const wall_3 = this.add.rectangle(1319, 540, 128, 128);
 		wall_3.scaleX = 0.2;
 		wall_3.scaleY = 7;
-		wall_3.isFilled = true;
 		container_walls.add(wall_3);
 
 		// wall_4
-		const wall_4 = this.add.rectangle(969, 989, 128, 128);
+		const wall_4 = this.add.rectangle(969, 876, 128, 128);
 		wall_4.scaleX = 0.2;
 		wall_4.scaleY = 7;
 		wall_4.angle = 90;
-		wall_4.isFilled = true;
 		container_walls.add(wall_4);
 
 		// carrom_board
 		const carrom_board = this.add.image(960, 540, "carrom-board");
-		carrom_board.scaleX = 2;
-		carrom_board.scaleY = 2;
+		carrom_board.scaleX = 0.8;
+		carrom_board.scaleY = 0.8;
 		container_background.add(carrom_board);
-
-		// title
-		const title = this.add.image(247, 379, "title");
-		container_background.add(title);
 
 		// container_halls
 		const container_halls = this.add.container(0, 0);
 		body.add(container_halls);
 
 		// hall_1
-		const hall_1 = this.add.ellipse(556, 949, 128, 128);
-		hall_1.scaleX = 0.5;
-		hall_1.scaleY = 0.5;
-		hall_1.isFilled = true;
-		hall_1.fillColor = 268635;
-		hall_1.fillAlpha = 0.3;
+		const hall_1 = this.add.ellipse(689, 823, 128, 128);
+		hall_1.scaleX = 0.2;
+		hall_1.scaleY = 0.2;
 		container_halls.add(hall_1);
 
 		// hall_2
-		const hall_2 = this.add.ellipse(554, 133, 128, 128);
-		hall_2.scaleX = 0.5;
-		hall_2.scaleY = 0.5;
-		hall_2.isFilled = true;
-		hall_2.fillColor = 268635;
-		hall_2.fillAlpha = 0.3;
+		const hall_2 = this.add.ellipse(690, 264, 128, 128);
+		hall_2.scaleX = 0.2;
+		hall_2.scaleY = 0.2;
 		container_halls.add(hall_2);
 
 		// hall_3
-		const hall_3 = this.add.ellipse(1365, 133, 128, 128);
-		hall_3.scaleX = 0.5;
-		hall_3.scaleY = 0.5;
-		hall_3.isFilled = true;
-		hall_3.fillColor = 268635;
-		hall_3.fillAlpha = 0.3;
+		const hall_3 = this.add.ellipse(1244, 262, 128, 128);
+		hall_3.scaleX = 0.2;
+		hall_3.scaleY = 0.2;
 		container_halls.add(hall_3);
 
 		// hall_4
-		const hall_4 = this.add.ellipse(1367, 950, 128, 128);
-		hall_4.scaleX = 0.5;
-		hall_4.scaleY = 0.5;
-		hall_4.isFilled = true;
-		hall_4.fillColor = 268635;
-		hall_4.fillAlpha = 0.3;
+		const hall_4 = this.add.ellipse(1247, 823, 128, 128);
+		hall_4.scaleX = 0.2;
+		hall_4.scaleY = 0.2;
 		container_halls.add(hall_4);
 
 		// container_slider
-		const container_slider = this.add.container(967, 1055);
+		const container_slider = this.add.container(967, 1033);
 		body.add(container_slider);
 
 		// slidebar
-		const slidebar = this.add.image(2, -5, "slidebar");
-		slidebar.scaleX = 1.4;
-		slidebar.scaleY = 0.65;
+		const slidebar = this.add.image(2, -52, "player_1_slidebar");
 		container_slider.add(slidebar);
 
+		// player_2_slidebar
+		const player_2_slidebar = this.add.image(2, -934, "player_2_slidebar");
+		container_slider.add(player_2_slidebar);
+
 		// slider
-		const slider = this.add.sprite(-278, -8, "slider");
-		slider.scaleX = 0.2;
-		slider.scaleY = 0.2;
+		const slider = this.add.sprite(-188, -54, "striker");
+		slider.name = "slider";
+		slider.scaleX = 1.1;
+		slider.scaleY = 1.1;
 		container_slider.add(slider);
 
 		// container_user
-		const container_user = this.add.container(269, 255);
+		const container_user = this.add.container(0, 0);
 		body.add(container_user);
 
 		// user_img
-		const user_img = this.add.image(-16, 588, "avatar_1");
+		const user_img = this.add.image(390, 445, "avatar_1");
+		user_img.scaleX = 0.7;
+		user_img.scaleY = 0.7;
 		container_user.add(user_img);
 
 		// userName
-		const userName = this.add.text(-16, 682, "", {});
+		const userName = this.add.text(390, 541, "", {});
 		userName.setOrigin(0.5, 0.5);
-		userName.text = "Raj";
-		userName.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
+		userName.text = "Player 1";
+		userName.setStyle({ "fontFamily": "Montserrat", "fontSize": "40px" });
 		container_user.add(userName);
 
+		// score_bar
+		const score_bar = this.add.image(390, 690, "score_bar");
+		score_bar.scaleX = 0.9;
+		score_bar.scaleY = 0.9;
+		container_user.add(score_bar);
+
 		// userScore
-		const userScore = this.add.text(18, 750, "", {});
+		const userScore = this.add.text(360, 690, "", {});
 		userScore.setOrigin(0.5, 0.5);
-		userScore.text = "0";
-		userScore.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
+		userScore.text = "0/8";
+		userScore.setStyle({ "fontFamily": "Montserrat", "fontSize": "46px" });
 		container_user.add(userScore);
 
 		// whiteCoin
-		const whiteCoin = this.add.image(-47, 750, "whiteCoin");
-		whiteCoin.scaleX = 2;
-		whiteCoin.scaleY = 2;
+		const whiteCoin = this.add.image(463, 690, "whiteCoin");
 		container_user.add(whiteCoin);
 
 		// container_opponent
-		const container_opponent = this.add.container(1684, 256);
+		const container_opponent = this.add.container(0, 0);
 		body.add(container_opponent);
 
 		// opponent_img
-		const opponent_img = this.add.image(-6, -119, "avatar_2");
+		const opponent_img = this.add.image(1530, 445, "avatar_2");
+		opponent_img.scaleX = 0.7;
+		opponent_img.scaleY = 0.7;
 		container_opponent.add(opponent_img);
 
 		// opponentName
-		const opponentName = this.add.text(-6, -19, "", {});
+		const opponentName = this.add.text(1530, 541, "", {});
 		opponentName.setOrigin(0.5, 0.5);
-		opponentName.text = "Fenil";
-		opponentName.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
+		opponentName.text = "Player 2";
+		opponentName.setStyle({ "fontFamily": "Montserrat", "fontSize": "40px" });
 		container_opponent.add(opponentName);
 
+		// score_bar_1
+		const score_bar_1 = this.add.image(1530, 690, "score_bar");
+		score_bar_1.scaleX = 0.9;
+		score_bar_1.scaleY = 0.9;
+		container_opponent.add(score_bar_1);
+
 		// opponentScore
-		const opponentScore = this.add.text(24, 49, "", {});
+		const opponentScore = this.add.text(1500, 690, "", {});
 		opponentScore.setOrigin(0.5, 0.5);
-		opponentScore.text = "0";
-		opponentScore.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px" });
+		opponentScore.text = "0/8";
+		opponentScore.setStyle({ "fontFamily": "Montserrat", "fontSize": "46px" });
 		container_opponent.add(opponentScore);
 
 		// blackCoin
-		const blackCoin = this.add.image(-41, 49, "blackCoin");
-		blackCoin.scaleX = 2;
-		blackCoin.scaleY = 2;
+		const blackCoin = this.add.image(1603, 690, "blackCoin");
 		container_opponent.add(blackCoin);
 
 		// container_whiteCoins
@@ -206,6 +197,10 @@ class Level extends Phaser.Scene {
 		const container_queen = this.add.container(1455, 423);
 		body.add(container_queen);
 
+		// container_winnerImage
+		const container_winnerImage = this.add.container(0, -3);
+		body.add(container_winnerImage);
+
 		this.container_walls = container_walls;
 		this.carrom_board = carrom_board;
 		this.container_halls = container_halls;
@@ -215,6 +210,7 @@ class Level extends Phaser.Scene {
 		this.container_whiteCoins = container_whiteCoins;
 		this.container_blackCoins = container_blackCoins;
 		this.container_queen = container_queen;
+		this.container_winnerImage = container_winnerImage;
 
 		this.events.emit("scene-awake");
 	}
@@ -237,6 +233,8 @@ class Level extends Phaser.Scene {
 	container_blackCoins;
 	/** @type {Phaser.GameObjects.Container} */
 	container_queen;
+	/** @type {Phaser.GameObjects.Container} */
+	container_winnerImage;
 
 	/* START-USER-CODE */
 
@@ -244,10 +242,10 @@ class Level extends Phaser.Scene {
 
 	changeTurn() {
 		let timeOut;
-		if(nStretchDistance < 90){
+		if (nStretchDistance < 90) {
 			timeOut = 100;
 		}
-		if (nStretchDistance>90 && nStretchDistance < 150) {
+		if (nStretchDistance > 90 && nStretchDistance < 150) {
 			timeOut = 2000;
 		}
 		if (nStretchDistance > 150 && nStretchDistance < 200) {
@@ -262,33 +260,40 @@ class Level extends Phaser.Scene {
 	}
 
 	checkForWinner(userWin) {
+		let winnerText;
 		if (userWin == true) {
-			const winText = this.add.image(960, 500, "text-win").setScale(0, 1);
-			this.tweens.add({
-				targets: winText,
-				ease: "power3",
-				scaleX: 1,
-				duration: 2000,
-				onComplete: () => {
-					this.reloadSceen();
-				}
-			});
+			winnerText = this.add.image(960, -75, "you_win").setScale(0.8, 0.8);
 		}
 		else {
-			const loseText = this.add.image(960, 500, "text-lose").setScale(0, 1);
-			this.tweens.add({
-				targets: loseText,
-				ease: "power3",
-				scaleX: 1,
-				duration: 2000,
-				onComplete: () => {
-					this.reloadSceen();
-				}
-			});
+			winnerText = this.add.image(960, -75, "you_lose").setScale(0.8, 0.8);
 		}
+		this.container_winnerImage.add(winnerText);
+		let winnerImage = this.add.image(960, 1246, "avatar_1").setScale(0.6, 0.6);
+		this.container_winnerImage.add(winnerImage);
+		let playerName = this.add.text(960, 1328, "", {});
+		playerName.setOrigin(0.5, 0.5);
+		playerName.text = "Player 1";
+		playerName.setStyle({ "fontFamily": "Montserrat", "fontSize": "40px" });
+		this.container_winnerImage.add(playerName);
+		this.winnerAnimation();
 	}
 
-	reloadSceen() {
+	winnerAnimation() {
+		let pos = [371, 576, 659];
+		this.container_winnerImage.list.forEach((image, i) => {
+			this.tweens.add({
+				targets: image,
+				ease: "power3",
+				y: pos[i],
+				duration: 1000,
+				onComplete: () => {
+					this.reloadScreen();
+				}
+			});
+		})
+	}
+
+	reloadScreen() {
 		this.striker.disableInteractive();
 		this.slider.disableInteractive();
 		const tryAgainText = this.add.text(960, 600, "", {});
@@ -298,8 +303,8 @@ class Level extends Phaser.Scene {
 		tryAgainText.setInteractive().on("pointerdown", () => {
 			nUserScore = 0;
 			nOpponentScore = 0;
-			this.userScore.setText(nUserScore);
-			this.opponentScore.setText(nOpponentScore);
+			this.userScore.setText(nUserScore, +"/8");
+			this.opponentScore.setText(nOpponentScore, +"/8");
 			this.scene.restart("Level");
 		});
 	}
@@ -309,127 +314,129 @@ class Level extends Phaser.Scene {
 		this.editorCreate();
 
 		this.oSoundManager = new SoundManager(this);
+		this.oTweenManager = new TweenManager(this);
 
-		this.striker = this.physics.add.sprite(680, 865, "striker").setScale(1.4).setOrigin(0.5, 0.5);
-		this.striker.body.setCircle(18, 1, 1);
-
-		this.arrow = this.add.image(this.striker.x, this.striker.y, "direction-arrow").setScale(0.7, 0.7).setOrigin(0.5, 0.6);
+		this.arrow = this.add.image(784, 773, "direction-arrow").setScale(0, 0).setOrigin(0.5, 0.5);
 		this.arrow.setVisible(false);
 
+		this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5);
+		this.striker.setName("striker");
+		this.striker.body.setCircle(27, 6, 6);
+
 		// whiteCoin_1
-		const whiteCoin_1 = this.add.sprite(-495, 177, "whiteCoin");
-		whiteCoin_1.scaleX = 1.3;
-		whiteCoin_1.scaleY = 1.3;
+		const whiteCoin_1 = this.add.image(-527, 49, "whiteCoin");
+		whiteCoin_1.scaleX = 0.35;
+		whiteCoin_1.scaleY = 0.35;
 		this.container_whiteCoins.add(whiteCoin_1);
 
-		// whiteCoin_2
-		const whiteCoin_2 = this.add.sprite(-434, 72, "whiteCoin");
-		whiteCoin_2.scaleX = 1.3;
-		whiteCoin_2.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_2);
-
-		// whiteCoin_3
-		const whiteCoin_3 = this.add.sprite(-481, 74, "whiteCoin");
-		whiteCoin_3.scaleX = 1.3;
-		whiteCoin_3.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_3);
-
-		// whiteCoin_4
-		const whiteCoin_4 = this.add.sprite(-434, 141, "whiteCoin");
-		whiteCoin_4.scaleX = 1.3;
-		whiteCoin_4.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_4);
-
-		// whiteCoin_5
-		const whiteCoin_5 = this.add.sprite(-554, 72, "whiteCoin");
-		whiteCoin_5.scaleX = 1.3;
-		whiteCoin_5.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_5);
-
-		// whiteCoin_6
-		const whiteCoin_6 = this.add.sprite(-495, 37, "whiteCoin");
-		whiteCoin_6.scaleX = 1.3;
-		whiteCoin_6.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_6);
-
-		// whiteCoin_7
-		const whiteCoin_7 = this.add.sprite(-554, 141, "whiteCoin");
-		whiteCoin_7.scaleX = 1.3;
-		whiteCoin_7.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_7);
-
-		// whiteCoin_8
-		const whiteCoin_8 = this.add.sprite(-532, 108, "whiteCoin");
-		whiteCoin_8.scaleX = 1.3;
-		whiteCoin_8.scaleY = 1.3;
-		this.container_whiteCoins.add(whiteCoin_8);
-
 		// whiteCoin_9
-		const whiteCoin_9 = this.add.sprite(-476, 137, "whiteCoin");
-		whiteCoin_9.scaleX = 1.3;
-		whiteCoin_9.scaleY = 1.3;
+		const whiteCoin_9 = this.add.image(-556, 114, "whiteCoin");
+		whiteCoin_9.scaleX = 0.35;
+		whiteCoin_9.scaleY = 0.35;
 		this.container_whiteCoins.add(whiteCoin_9);
 
+		// whiteCoin_8
+		const whiteCoin_8 = this.add.image(-419, 104, "whiteCoin");
+		whiteCoin_8.scaleX = 0.35;
+		whiteCoin_8.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_8);
+
+		// whiteCoin_7
+		const whiteCoin_7 = this.add.image(-518, 169, "whiteCoin");
+		whiteCoin_7.scaleX = 0.35;
+		whiteCoin_7.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_7);
+
+		// whiteCoin_6
+		const whiteCoin_6 = this.add.image(-520, 129, "whiteCoin");
+		whiteCoin_6.scaleX = 0.35;
+		whiteCoin_6.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_6);
+
+		// whiteCoin_5
+		const whiteCoin_5 = this.add.image(-490, 70, "whiteCoin");
+		whiteCoin_5.scaleX = 0.35;
+		whiteCoin_5.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_5);
+
+		// whiteCoin_4
+		const whiteCoin_4 = this.add.image(-454, 126, "whiteCoin");
+		whiteCoin_4.scaleX = 0.35;
+		whiteCoin_4.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_4);
+
+		// whiteCoin_3
+		const whiteCoin_3 = this.add.image(-450, 165, "whiteCoin");
+		whiteCoin_3.scaleX = 0.35;
+		whiteCoin_3.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_3);
+
+		// whiteCoin_2
+		const whiteCoin_2 = this.add.image(-456, 46, "whiteCoin");
+		whiteCoin_2.scaleX = 0.35;
+		whiteCoin_2.scaleY = 0.35;
+		this.container_whiteCoins.add(whiteCoin_2);
 
 		// blackCoin_1
-		const blackCoin_1 = this.add.sprite(-515, 79, "blackCoin");
-		blackCoin_1.scaleX = 1.3;
-		blackCoin_1.scaleY = 1.3;
+		const blackCoin_1 = this.add.image(-492, 35, "blackCoin");
+		blackCoin_1.scaleX = 0.35;
+		blackCoin_1.scaleY = 0.35;
 		this.container_blackCoins.add(blackCoin_1);
 
-		// blackCoin_2
-		const blackCoin_2 = this.add.sprite(-424, 109, "blackCoin");
-		blackCoin_2.scaleX = 1.3;
-		blackCoin_2.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_2);
-
-		// blackCoin_3
-		const blackCoin_3 = this.add.sprite(-530, 48, "blackCoin");
-		blackCoin_3.scaleX = 1.3;
-		blackCoin_3.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_3);
-
-		// blackCoin_4
-		const blackCoin_4 = this.add.sprite(-566, 109, "blackCoin");
-		blackCoin_4.scaleX = 1.3;
-		blackCoin_4.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_4);
-
-		// blackCoin_5
-		const blackCoin_5 = this.add.sprite(-511, 142, "blackCoin");
-		blackCoin_5.scaleX = 1.3;
-		blackCoin_5.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_5);
-
-		// blackCoin_6
-		const blackCoin_6 = this.add.sprite(-531, 172, "blackCoin");
-		blackCoin_6.scaleX = 1.3;
-		blackCoin_6.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_6);
-
-		// blackCoin_7
-		const blackCoin_7 = this.add.sprite(-459, 171, "blackCoin");
-		blackCoin_7.scaleX = 1.3;
-		blackCoin_7.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_7);
-
-		// blackCoin_8
-		const blackCoin_8 = this.add.sprite(-460, 49, "blackCoin");
-		blackCoin_8.scaleX = 1.3;
-		blackCoin_8.scaleY = 1.3;
-		this.container_blackCoins.add(blackCoin_8);
-
 		// blackCoin_9
-		const blackCoin_9 = this.add.sprite(-460, 107, "blackCoin");
-		blackCoin_9.scaleX = 1.3;
-		blackCoin_9.scaleY = 1.3;
+		const blackCoin_9 = this.add.image(-521, 93, "blackCoin");
+		blackCoin_9.scaleX = 0.35;
+		blackCoin_9.scaleY = 0.35;
 		this.container_blackCoins.add(blackCoin_9);
 
-		// queenCoin
-		queenCoin = this.add.sprite(-495, 119, "redCoin");
-		queenCoin.scaleX = 1.3;
-		queenCoin.scaleY = 1.3;
+		// blackCoin_8
+		const blackCoin_8 = this.add.image(-424, 70, "blackCoin");
+		blackCoin_8.scaleX = 0.35;
+		blackCoin_8.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_8);
+
+		// blackCoin_7
+		const blackCoin_7 = this.add.image(-555, 79, "blackCoin");
+		blackCoin_7.scaleX = 0.35;
+		blackCoin_7.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_7);
+
+		// blackCoin_6
+		const blackCoin_6 = this.add.image(-551, 155, "blackCoin");
+		blackCoin_6.scaleX = 0.35;
+		blackCoin_6.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_6);
+
+		// blackCoin_5
+		const blackCoin_5 = this.add.image(-484, 186, "blackCoin");
+		blackCoin_5.scaleX = 0.35;
+		blackCoin_5.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_5);
+
+		// blackCoin_4
+		const blackCoin_4 = this.add.image(-486, 149, "blackCoin");
+		blackCoin_4.scaleX = 0.35;
+		blackCoin_4.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_4);
+
+		// blackCoin_3
+		const blackCoin_3 = this.add.image(-456, 90, "blackCoin");
+		blackCoin_3.scaleX = 0.35;
+		blackCoin_3.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_3);
+
+		// blackCoin_2
+		const blackCoin_2 = this.add.image(-419, 144, "blackCoin");
+		blackCoin_2.scaleX = 0.35;
+		blackCoin_2.scaleY = 0.35;
+		this.container_blackCoins.add(blackCoin_2);
+
+		// redCoin
+		queenCoin = this.add.image(-488, 120, "redCoin");
+		queenCoin.scaleX = 0.21;
+		queenCoin.scaleY = 0.21;
 		this.container_queen.add(queenCoin);
+
 
 		this.hallsGroup = this.add.group();
 		this.wallGroup = this.add.group();
@@ -443,7 +450,7 @@ class Level extends Phaser.Scene {
 				wall.body.setOffset(-15, 0);
 			}
 			else {
-				wall.body.setSize(900, 30);
+				wall.body.setSize(900, 50);
 				wall.body.setOffset(-450, 440);
 			}
 			this.wallGroup.add(wall);
@@ -451,22 +458,22 @@ class Level extends Phaser.Scene {
 
 		this.container_whiteCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
-			coin.body.setCircle(13, 2, 1);
+			coin.body.setCircle(50, 15, 15);
 			this.whiteCoinGroup.add(coin);
 		});
 
 		this.container_blackCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
-			coin.body.setCircle(13, 2, 1);
+			coin.body.setCircle(50, 15, 15);
 			this.blackCoinGroup.add(coin);
 		});
 
 		this.physics.add.existing(queenCoin, false);
-		queenCoin.body.setCircle(13, 2, 1);
+		queenCoin.body.setCircle(90, 40, 40);
 
 		this.container_halls.list.forEach((hall) => {
 			this.physics.add.existing(hall, true);
-			hall.body.setSize(25, 25);
+			hall.body.setCircle(13, 15, 15);
 			this.hallsGroup.add(hall);
 		})
 
@@ -503,9 +510,10 @@ class Level extends Phaser.Scene {
 			if (userTurn && nUserScore > 0) {
 				if (repeateUserTurn) {
 					nUserScore -= 2;
-					const whiteCoinCharge = this.physics.add.sprite(-495, 119, "whiteCoin");
-					whiteCoinCharge.scaleX = 1.3;
-					whiteCoinCharge.scaleY = 1.3;
+					const whiteCoinCharge = this.physics.add.sprite(-488, 120, "whiteCoin");
+					whiteCoinCharge.scaleX = 0.35;
+					whiteCoinCharge.scaleY = 0.35;
+					whiteCoinCharge.body.setCircle(50, 15, 15);
 					this.container_whiteCoins.add(whiteCoinCharge);
 					this.whiteCoinGroup.add(whiteCoinCharge);
 					repeateUserTurn = false;
@@ -513,30 +521,33 @@ class Level extends Phaser.Scene {
 				else {
 					nUserScore--;
 				}
-				this.userScore.setText(nUserScore);
-				const whiteCoinCharge = this.physics.add.sprite(-495, 119, "whiteCoin");
-				whiteCoinCharge.scaleX = 1.3;
-				whiteCoinCharge.scaleY = 1.3;
+				this.userScore.setText(nUserScore + "/8");
+				const whiteCoinCharge = this.physics.add.sprite(-488, 120, "whiteCoin");
+				whiteCoinCharge.scaleX = 0.35;
+				whiteCoinCharge.scaleY = 0.35;
+				whiteCoinCharge.body.setCircle(50, 15, 15);
 				this.container_whiteCoins.add(whiteCoinCharge);
 				this.whiteCoinGroup.add(whiteCoinCharge);
 			}
 			if (!userTurn && nOpponentScore > 0) {
 				if (repeateOpponentTurn) {
 					nOpponentScore -= 2;
-					const blackCoinCharge = this.physics.add.sprite(-495, 119, "blackCoin");
-					blackCoinCharge.scaleX = 1.3;
-					blackCoinCharge.scaleY = 1.3;
+					const blackCoinCharge = this.physics.add.sprite(-488, 120, "blackCoin");
+					blackCoinCharge.scaleX = 0.35;
+					blackCoinCharge.scaleY = 0.35;
+					blackCoinCharge.body.setCircle(50, 15, 15);
 					this.container_blackCoins.add(blackCoinCharge);
 					this.blackCoinGroup.add(blackCoinCharge);
 					repeateOpponentTurn = false;
 				}
-				else{
+				else {
 					nOpponentScore--;
 				}
-				this.opponentScore.setText(nOpponentScore);
-				const blackCoinCharge = this.physics.add.sprite(-495, 119, "blackCoin");
-				blackCoinCharge.scaleX = 1.3;
-				blackCoinCharge.scaleY = 1.3;
+				this.opponentScore.setText(nOpponentScore + "/8");
+				const blackCoinCharge = this.physics.add.sprite(-488, 120, "blackCoin");
+				blackCoinCharge.scaleX = 0.35;
+				blackCoinCharge.scaleY = 0.35;
+				blackCoinCharge.body.setCircle(50, 15, 15);
 				this.container_blackCoins.add(blackCoinCharge);
 				this.blackCoinGroup.add(blackCoinCharge);
 			}
@@ -545,11 +556,11 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
 			coin.destroy();
 			nOpponentScore++;
-			this.opponentScore.setText(nOpponentScore);
+			this.opponentScore.setText(nOpponentScore + "/8");
 
 			if (!userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
-				if(this.container_blackCoins.list.length == 0 && !opponentQueenFouls){
+				if (this.container_blackCoins.list.length == 0 && !opponentQueenFouls) {
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
@@ -569,7 +580,7 @@ class Level extends Phaser.Scene {
 			else {
 				repeateUserTurn = false;
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-				if(this.container_blackCoins.list.length == 0){
+				if (this.container_blackCoins.list.length == 0) {
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -579,11 +590,11 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
 			coin.destroy();
 			nUserScore++;
-			this.userScore.setText(nUserScore);
+			this.userScore.setText(nUserScore + "/8");
 
 			if (userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
-				if(this.container_whiteCoins.list.length == 0 && !userQueenFouls){
+				if (this.container_whiteCoins.list.length == 0 && !userQueenFouls) {
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -604,7 +615,7 @@ class Level extends Phaser.Scene {
 			else {
 				repeateOpponentTurn = false;
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-				if(this.container_whiteCoins.list.length == 0){
+				if (this.container_whiteCoins.list.length == 0) {
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
@@ -619,7 +630,7 @@ class Level extends Phaser.Scene {
 					opponentQueenFouls = true;
 					repeateOpponentTurn = true;
 					setTimeout(() => {
-						queenCoin.setPosition(-495, 119).setVisible(true);
+						queenCoin.setPosition(-488, 120).setVisible(true);
 					}, 4000);
 				}
 				else {
@@ -636,7 +647,7 @@ class Level extends Phaser.Scene {
 					userQueenFouls = true;
 					repeateUserTurn = true;
 					setTimeout(() => {
-						queenCoin.setPosition(-495, 119).setVisible(true);
+						queenCoin.setPosition(-486, 120).setVisible(true);
 					}, 4000);
 				}
 				else {
@@ -685,14 +696,13 @@ class Level extends Phaser.Scene {
 	setStrikerPosition() {
 		this.slider.setInteractive();
 		this.input.setDraggable(this.slider);
-
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
 
-			if (gameObject.texture.key == "slider") {
-				dragX = Math.min(Math.max(-279, dragX), 286);
+			if (gameObject.name == "slider") {
+				dragX = Math.min(Math.max(-188, dragX), 193);
 
 				gameObject.x = dragX;
-				this.striker.x = gameObject.x + 955;
+				this.striker.x = gameObject.x + 960;
 			}
 		});
 
@@ -707,14 +717,15 @@ class Level extends Phaser.Scene {
 
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
 
-			if (gameObject.texture.key == "striker") {
+			if (gameObject.name == "striker") {
 
 				this.arrow.setPosition(this.striker.x, this.striker.y);
 				this.arrow.setVisible(true);
-
+				// console.log(dragY, gameObject.y);
 				angle = Phaser.Math.Angle.Between(this.striker.x, this.striker.y, dragX, dragY);
 
 				if (userTurn) {
+					this.arrow.scale = Phaser.Math.Clamp((dragY / 600 - gameObject.y / 600) + 1, 1, 2);
 					nStretchDistance = Phaser.Math.Clamp((dragY - gameObject.y) + 100, 0, nMaxStretch);
 					this.striker.setRotation(angle);
 					if (angle < 1.80) {
@@ -725,6 +736,7 @@ class Level extends Phaser.Scene {
 					}
 				}
 				else {
+					this.arrow.scale = Phaser.Math.Clamp((-(dragY / 600 - gameObject.y / 600)) + 1, 1, 2);
 					nStretchDistance = Phaser.Math.Clamp(-(dragY - gameObject.y) + 100, 0, nMaxStretch);
 					this.striker.setRotation(-angle);
 					if (angle < -1.59) {
@@ -740,13 +752,13 @@ class Level extends Phaser.Scene {
 
 		this.input.once('dragend', (pointer, gameObject) => {
 			this.arrow.setVisible(false);
-			if (gameObject.texture.key == "striker") {
+			if (gameObject.name == "striker") {
 
 				this.slider.disableInteractive();
 				this.striker.disableInteractive();
 
-				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 2;
-				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 2;
+				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 3;
+				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 3;
 
 				if (userTurn) {
 					gameObject.setVelocity(-nVelocityX, -nVelocityY);
@@ -804,18 +816,19 @@ class Level extends Phaser.Scene {
 		if (userTurn) {
 			repeateUserTurn = false;
 			setTimeout(() => {
-				this.striker.setPosition(680, 865);
+				this.striker.setPosition(784, 773);
+				this.slider.setPosition(-188, -54);
 			}, 400);
 		}
 		else {
 			repeateOpponentTurn = false;
 			setTimeout(() => {
-				this.striker.setPosition(678, 223);
+				this.striker.setPosition(784, 318);
+				this.slider.setPosition(-188, -938);
 			}, 400);
 		}
 
 		this.physics.pause();
-		this.slider.setPosition(-286, -8);
 		this.slider.setInteractive();
 		this.striker.setInteractive();
 	}

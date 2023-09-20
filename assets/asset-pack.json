@@ -12,19 +12,9 @@
                 "key": "avatar_2"
             },
             {
-                "url": "assets/images/background-img.png",
-                "type": "image",
-                "key": "background-img"
-            },
-            {
                 "url": "assets/images/banner-img.jpg",
                 "type": "image",
                 "key": "banner-img"
-            },
-            {
-                "url": "assets/images/blackCoin.png",
-                "type": "image",
-                "key": "blackCoin"
             },
             {
                 "url": "assets/images/carrom-board.png",
@@ -73,24 +63,14 @@
                 "key": "Level"
             },
             {
-                "url": "src/scenes/Loading.js",
-                "type": "sceneFile",
-                "key": "Loading"
+                "url": "assets/images/player_1_slidebar.png",
+                "type": "image",
+                "key": "player_1_slidebar"
             },
             {
-                "url": "assets/images/logo.png",
+                "url": "assets/images/player_2_slidebar.png",
                 "type": "image",
-                "key": "logo"
-            },
-            {
-                "url": "assets/images/opponent-img.png",
-                "type": "image",
-                "key": "opponent-img"
-            },
-            {
-                "url": "assets/images/redCoin.png",
-                "type": "image",
-                "key": "redCoin"
+                "key": "player_2_slidebar"
             },
             {
                 "url": [
@@ -98,6 +78,11 @@
                 ],
                 "type": "audio",
                 "key": "rightCoinFouls"
+            },
+            {
+                "url": "assets/images/score_bar.png",
+                "type": "image",
+                "key": "score_bar"
             },
             {
                 "url": "assets/images/slidebar.png",
@@ -130,29 +115,14 @@
                 "key": "striker"
             },
             {
-                "url": "assets/images/text-lose.png",
-                "type": "image",
-                "key": "text-lose"
-            },
-            {
-                "url": "assets/images/text-win.png",
-                "type": "image",
-                "key": "text-win"
-            },
-            {
                 "url": "assets/images/title.png",
                 "type": "image",
                 "key": "title"
             },
             {
-                "url": "assets/images/user-img.png",
-                "type": "image",
-                "key": "user-img"
-            },
-            {
-                "url": "assets/images/whiteCoin.png",
-                "type": "image",
-                "key": "whiteCoin"
+                "url": "src/scripts/TweenManager.js",
+                "type": "script",
+                "key": "TweenManager"
             },
             {
                 "url": [
@@ -160,6 +130,16 @@
                 ],
                 "type": "audio",
                 "key": "wrongCoinFouls"
+            },
+            {
+                "url": "assets/images/you_lose.png",
+                "type": "image",
+                "key": "you_lose"
+            },
+            {
+                "url": "assets/images/you_win.png",
+                "type": "image",
+                "key": "you_win"
             }
         ]
     },
