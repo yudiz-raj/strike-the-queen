@@ -235,7 +235,7 @@
                             "y": 690,
                             "originX": 0.5,
                             "originY": 0.5,
-                            "text": "0/8",
+                            "text": "0/9",
                             "fontFamily": "Montserrat",
                             "fontSize": "46px"
                         },
@@ -301,7 +301,7 @@
                             "y": 690,
                             "originX": 0.5,
                             "originY": 0.5,
-                            "text": "0/8",
+                            "text": "0/9",
                             "fontFamily": "Montserrat",
                             "fontSize": "46px"
                         },
@@ -340,6 +340,13 @@
                     "scope": "CLASS",
                     "x": 1455,
                     "y": 423
+                },
+                {
+                    "type": "Container",
+                    "id": "68bf768c-9396-4ff3-b8e7-bc08000f8799",
+                    "label": "container_striker",
+                    "scope": "CLASS",
+                    "y": -3
                 },
                 {
                     "type": "Container",

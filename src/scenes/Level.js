@@ -143,7 +143,7 @@ class Level extends Phaser.Scene {
 		// userScore
 		const userScore = this.add.text(360, 690, "", {});
 		userScore.setOrigin(0.5, 0.5);
-		userScore.text = "0/8";
+		userScore.text = "0/9";
 		userScore.setStyle({ "fontFamily": "Montserrat", "fontSize": "46px" });
 		container_user.add(userScore);
 
@@ -177,7 +177,7 @@ class Level extends Phaser.Scene {
 		// opponentScore
 		const opponentScore = this.add.text(1500, 690, "", {});
 		opponentScore.setOrigin(0.5, 0.5);
-		opponentScore.text = "0/8";
+		opponentScore.text = "0/9";
 		opponentScore.setStyle({ "fontFamily": "Montserrat", "fontSize": "46px" });
 		container_opponent.add(opponentScore);
 
@@ -197,6 +197,10 @@ class Level extends Phaser.Scene {
 		const container_queen = this.add.container(1455, 423);
 		body.add(container_queen);
 
+		// container_striker
+		const container_striker = this.add.container(0, -3);
+		body.add(container_striker);
+
 		// container_winnerImage
 		const container_winnerImage = this.add.container(0, -3);
 		body.add(container_winnerImage);
@@ -210,6 +214,7 @@ class Level extends Phaser.Scene {
 		this.container_whiteCoins = container_whiteCoins;
 		this.container_blackCoins = container_blackCoins;
 		this.container_queen = container_queen;
+		this.container_striker = container_striker;
 		this.container_winnerImage = container_winnerImage;
 
 		this.events.emit("scene-awake");
@@ -234,6 +239,8 @@ class Level extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	container_queen;
 	/** @type {Phaser.GameObjects.Container} */
+	container_striker;
+	/** @type {Phaser.GameObjects.Container} */
 	container_winnerImage;
 
 	/* START-USER-CODE */
@@ -246,13 +253,13 @@ class Level extends Phaser.Scene {
 			timeOut = 100;
 		}
 		if (nStretchDistance > 90 && nStretchDistance < 150) {
-			timeOut = 2000;
+			timeOut = 3000;
 		}
 		if (nStretchDistance > 150 && nStretchDistance < 200) {
-			timeOut = 2500;
+			timeOut = 3500;
 		}
 		if (nStretchDistance > 200) {
-			timeOut = 3200;
+			timeOut = 4000;
 		}
 		setTimeout(() => {
 			this.stopMovement();
@@ -261,25 +268,30 @@ class Level extends Phaser.Scene {
 
 	checkForWinner(userWin) {
 		let winnerText;
+		console.log(userWin);
 		if (userWin == true) {
-			winnerText = this.add.image(960, -75, "you_win").setScale(0.8, 0.8);
+			console.log("userWin");
+			winnerText = this.add.image(960, -75, "you_win").setScale(0.6, 0.6);
 		}
 		else {
-			winnerText = this.add.image(960, -75, "you_lose").setScale(0.8, 0.8);
+			console.log("userLose");
+			winnerText = this.add.image(960, -75, "you_lose").setScale(0.6, 0.6);
 		}
+		console.log(winnerText);
 		this.container_winnerImage.add(winnerText);
-		let winnerImage = this.add.image(960, 1246, "avatar_1").setScale(0.6, 0.6);
+		let winnerImage = this.add.image(960, 1246, "avatar_1").setScale(0.5, 0.5);
 		this.container_winnerImage.add(winnerImage);
 		let playerName = this.add.text(960, 1328, "", {});
 		playerName.setOrigin(0.5, 0.5);
 		playerName.text = "Player 1";
-		playerName.setStyle({ "fontFamily": "Montserrat", "fontSize": "40px" });
+		playerName.setStyle({ "fontFamily": "Montserrat", "fontSize": "32px" });
 		this.container_winnerImage.add(playerName);
+		this.scene.bringToTop(this.container_winnerImage);
 		this.winnerAnimation();
 	}
 
 	winnerAnimation() {
-		let pos = [371, 576, 659];
+		let pos = [396, 559, 628];
 		this.container_winnerImage.list.forEach((image, i) => {
 			this.tweens.add({
 				targets: image,
@@ -303,8 +315,8 @@ class Level extends Phaser.Scene {
 		tryAgainText.setInteractive().on("pointerdown", () => {
 			nUserScore = 0;
 			nOpponentScore = 0;
-			this.userScore.setText(nUserScore, +"/8");
-			this.opponentScore.setText(nOpponentScore, +"/8");
+			this.userScore.setText(nUserScore, +"/9");
+			this.opponentScore.setText(nOpponentScore, +"/9");
 			this.scene.restart("Level");
 		});
 	}
@@ -322,6 +334,7 @@ class Level extends Phaser.Scene {
 		this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5);
 		this.striker.setName("striker");
 		this.striker.body.setCircle(27, 6, 6);
+		this.container_striker.add(this.striker);
 
 		// whiteCoin_1
 		const whiteCoin_1 = this.add.image(-527, 49, "whiteCoin");
@@ -509,7 +522,12 @@ class Level extends Phaser.Scene {
 			this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 			if (userTurn && nUserScore > 0) {
 				if (repeateUserTurn) {
-					nUserScore -= 2;
+					if (nUserScore >= 2) {
+						nUserScore -= 2;
+					}
+					else {
+						nUserScore--;
+					}
 					const whiteCoinCharge = this.physics.add.sprite(-488, 120, "whiteCoin");
 					whiteCoinCharge.scaleX = 0.35;
 					whiteCoinCharge.scaleY = 0.35;
@@ -521,7 +539,7 @@ class Level extends Phaser.Scene {
 				else {
 					nUserScore--;
 				}
-				this.userScore.setText(nUserScore + "/8");
+				this.userScore.setText(nUserScore + "/9");
 				const whiteCoinCharge = this.physics.add.sprite(-488, 120, "whiteCoin");
 				whiteCoinCharge.scaleX = 0.35;
 				whiteCoinCharge.scaleY = 0.35;
@@ -531,7 +549,12 @@ class Level extends Phaser.Scene {
 			}
 			if (!userTurn && nOpponentScore > 0) {
 				if (repeateOpponentTurn) {
-					nOpponentScore -= 2;
+					if (nOpponentScore >= 2) {
+						nOpponentScore -= 2;
+					}
+					else {
+						nOpponentScore--;
+					}
 					const blackCoinCharge = this.physics.add.sprite(-488, 120, "blackCoin");
 					blackCoinCharge.scaleX = 0.35;
 					blackCoinCharge.scaleY = 0.35;
@@ -543,7 +566,7 @@ class Level extends Phaser.Scene {
 				else {
 					nOpponentScore--;
 				}
-				this.opponentScore.setText(nOpponentScore + "/8");
+				this.opponentScore.setText(nOpponentScore + "/9");
 				const blackCoinCharge = this.physics.add.sprite(-488, 120, "blackCoin");
 				blackCoinCharge.scaleX = 0.35;
 				blackCoinCharge.scaleY = 0.35;
@@ -555,8 +578,9 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
 			coin.destroy();
+
 			nOpponentScore++;
-			this.opponentScore.setText(nOpponentScore + "/8");
+			this.opponentScore.setText(nOpponentScore + "/9");
 
 			if (!userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
@@ -590,7 +614,7 @@ class Level extends Phaser.Scene {
 		this.physics.add.collider(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
 			coin.destroy();
 			nUserScore++;
-			this.userScore.setText(nUserScore + "/8");
+			this.userScore.setText(nUserScore + "/9");
 
 			if (userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
@@ -757,8 +781,8 @@ class Level extends Phaser.Scene {
 				this.slider.disableInteractive();
 				this.striker.disableInteractive();
 
-				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 3;
-				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 3;
+				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 2;
+				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 2;
 
 				if (userTurn) {
 					gameObject.setVelocity(-nVelocityX, -nVelocityY);
