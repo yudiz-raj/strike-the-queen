@@ -29,8 +29,14 @@ class Preload extends Phaser.Scene {
 		progress.text = "0%";
 		progress.setStyle({ "fontSize": "54px" });
 
-		// splash_screen
-		this.add.image(960, 540, "splash_screen");
+		// carrom
+		const carrom = this.add.image(960, 540, "carrom");
+		carrom.scaleX = 0.9;
+		carrom.scaleY = 0.9;
+		carrom.tintTopLeft = 11974326;
+		carrom.tintTopRight = 11974326;
+		carrom.tintBottomLeft = 11974326;
+		carrom.tintBottomRight = 11974326;
 
 		// loading_bar
 		const loading_bar = this.add.image(960, 1000, "loading_bar");
@@ -41,7 +47,7 @@ class Preload extends Phaser.Scene {
 		innerBar.visible = false;
 
 		// logoPrefab
-		const logoPrefab = new LogoPrefab(this, 961, 371);
+		const logoPrefab = new LogoPrefab(this, 960, 391);
 		this.add.existing(logoPrefab);
 
 		// text_1

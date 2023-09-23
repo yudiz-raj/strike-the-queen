@@ -29,13 +29,19 @@
         },
         {
             "type": "Image",
-            "id": "93261608-7eed-444c-bbdd-390d8cf79d69",
-            "label": "splash_screen",
+            "id": "c13f4385-ea02-4bf3-b011-c3e26cf44232",
+            "label": "carrom",
             "texture": {
-                "key": "splash_screen"
+                "key": "carrom"
             },
             "x": 960,
-            "y": 540
+            "y": 540,
+            "scaleX": 0.9,
+            "scaleY": 0.9,
+            "tintTopLeft": "#b6b6b6",
+            "tintTopRight": "#b6b6b6",
+            "tintBottomLeft": "#b6b6b6",
+            "tintBottomRight": "#b6b6b6"
         },
         {
             "type": "Image",
@@ -70,8 +76,8 @@
             ],
             "label": "logoPrefab",
             "scope": "CLASS",
-            "x": 961,
-            "y": 371
+            "x": 960,
+            "y": 391
         },
         {
             "type": "Text",

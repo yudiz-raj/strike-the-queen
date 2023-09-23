@@ -323,8 +323,8 @@ class Level extends Phaser.Scene {
 
 	create() {
 
+		document.body.style.backgroundImage = "url('assets/images/background.png')";
 		this.editorCreate();
-
 		this.oSoundManager = new SoundManager(this);
 		this.oTweenManager = new TweenManager(this);
 
@@ -684,10 +684,12 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
+			this.striker.setBounce(0.5, 0.5);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
+			this.striker.setBounce(0.5, 0.5);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -704,6 +706,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
+			this.striker.setBounce(0.5, 0.5);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -794,14 +797,14 @@ class Level extends Phaser.Scene {
 				gameObject.body.setBounce(1, 1);
 
 				this.container_whiteCoins.list.forEach((coin) => {
-					coin.body.setBounce(1, 1);
+					coin.body.setBounce(0.8, 0.8);
 				});
 
 				this.container_blackCoins.list.forEach((coin) => {
-					coin.body.setBounce(1, 1);
+					coin.body.setBounce(0.8, 0.8);
 				});
 
-				queenCoin.body.setBounce(1, 1);
+				queenCoin.body.setBounce(0.8, 0.8);
 
 				this.physics.resume();
 				strikerCollideWithHall = false;

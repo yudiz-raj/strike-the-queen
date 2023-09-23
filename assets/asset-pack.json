@@ -12,11 +12,6 @@
                 "key": "avatar_2"
             },
             {
-                "url": "assets/images/banner-img.jpg",
-                "type": "image",
-                "key": "banner-img"
-            },
-            {
                 "url": "assets/images/carrom-board.png",
                 "type": "image",
                 "key": "carrom-board"
@@ -85,16 +80,6 @@
                 "key": "score_bar"
             },
             {
-                "url": "assets/images/slidebar.png",
-                "type": "image",
-                "key": "slidebar"
-            },
-            {
-                "url": "assets/images/slider.png",
-                "type": "image",
-                "key": "slider"
-            },
-            {
                 "url": "src/scripts/SocketManager.js",
                 "type": "script",
                 "key": "SocketManager"
@@ -105,19 +90,9 @@
                 "key": "SoundManager"
             },
             {
-                "url": "assets/images/start-button.png",
-                "type": "image",
-                "key": "start-button"
-            },
-            {
                 "url": "assets/images/striker.png",
                 "type": "image",
                 "key": "striker"
-            },
-            {
-                "url": "assets/images/title.png",
-                "type": "image",
-                "key": "title"
             },
             {
                 "url": "src/scripts/TweenManager.js",

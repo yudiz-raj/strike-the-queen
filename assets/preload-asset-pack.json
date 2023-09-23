@@ -7,6 +7,11 @@
                 "key": "blackCoin"
             },
             {
+                "url": "assets/images/carrom.png",
+                "type": "image",
+                "key": "carrom"
+            },
+            {
                 "url": "assets/images/loading.png",
                 "type": "image",
                 "key": "loading"
@@ -15,11 +20,6 @@
                 "url": "assets/images/loading_bar.png",
                 "type": "image",
                 "key": "loading_bar"
-            },
-            {
-                "url": "assets/images/loading-img.jpg",
-                "type": "image",
-                "key": "loading-img"
             },
             {
                 "url": "assets/images/logo.png",
