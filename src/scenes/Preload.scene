@@ -37,11 +37,17 @@
             "x": 960,
             "y": 540,
             "scaleX": 0.9,
-            "scaleY": 0.9,
-            "tintTopLeft": "#b6b6b6",
-            "tintTopRight": "#b6b6b6",
-            "tintBottomLeft": "#b6b6b6",
-            "tintBottomRight": "#b6b6b6"
+            "scaleY": 0.9
+        },
+        {
+            "type": "Image",
+            "id": "b20d28e7-f4a7-4866-83d7-3ff8bf354750",
+            "label": "front",
+            "texture": {
+                "key": "front"
+            },
+            "x": 960,
+            "y": 540
         },
         {
             "type": "Image",

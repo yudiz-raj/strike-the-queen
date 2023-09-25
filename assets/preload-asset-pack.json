@@ -12,6 +12,11 @@
                 "key": "carrom"
             },
             {
+                "url": "assets/images/front.png",
+                "type": "image",
+                "key": "front"
+            },
+            {
                 "url": "assets/images/loading.png",
                 "type": "image",
                 "key": "loading"

@@ -12,6 +12,7 @@ let opponentQueenFouls = false;
 let nUserScore = 0;
 let nOpponentScore = 0;
 let userWin = true;
+let gameOver = false;
 /* START OF COMPILED CODE */
 
 class Level extends Phaser.Scene {
@@ -262,22 +263,24 @@ class Level extends Phaser.Scene {
 			timeOut = 4000;
 		}
 		setTimeout(() => {
-			this.stopMovement();
+			if (!gameOver) {
+				this.stopMovement();
+			}
 		}, timeOut);
 	}
 
 	checkForWinner(userWin) {
 		let winnerText;
-		console.log(userWin);
+		gameOver = true;
+		let layer = this.add.image(960, 540, "front").setAlpha(0.5);
+		this.container_winnerImage.add(layer);
 		if (userWin == true) {
-			console.log("userWin");
 			winnerText = this.add.image(960, -75, "you_win").setScale(0.6, 0.6);
 		}
 		else {
 			console.log("userLose");
 			winnerText = this.add.image(960, -75, "you_lose").setScale(0.6, 0.6);
 		}
-		console.log(winnerText);
 		this.container_winnerImage.add(winnerText);
 		let winnerImage = this.add.image(960, 1246, "avatar_1").setScale(0.5, 0.5);
 		this.container_winnerImage.add(winnerImage);
@@ -286,12 +289,26 @@ class Level extends Phaser.Scene {
 		playerName.text = "Player 1";
 		playerName.setStyle({ "fontFamily": "Montserrat", "fontSize": "32px" });
 		this.container_winnerImage.add(playerName);
-		this.scene.bringToTop(this.container_winnerImage);
-		this.winnerAnimation();
+		let replayButton = this.add.image(960, 1246, "replay_button");
+		this.container_winnerImage.add(replayButton);
+		this.slider.disableInteractive();
+		this.striker.disableInteractive();
+		this.striker.body.setVelocity(0);
+		this.striker.setBounce(0);
+		this.container_blackCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
+		this.container_whiteCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
+		queenCoin.body.setVelocity(0);
+		queenCoin.destroy();
+		this.physics.pause();
+		this.winnerAnimation(replayButton);
 	}
 
-	winnerAnimation() {
-		let pos = [396, 559, 628];
+	winnerAnimation(replayButton) {
+		let pos = [540, 396, 559, 628, 784];
 		this.container_winnerImage.list.forEach((image, i) => {
 			this.tweens.add({
 				targets: image,
@@ -299,26 +316,38 @@ class Level extends Phaser.Scene {
 				y: pos[i],
 				duration: 1000,
 				onComplete: () => {
-					this.reloadScreen();
+					this.striker.disableInteractive();
+					this.slider.disableInteractive();
+					replayButton.setInteractive();
+					replayButton.on('pointerover', () => {
+						this.input.setDefaultCursor('pointer');
+						replayButton.setScale(1.1);
+					});
+					replayButton.on('pointerout', () => {
+						this.input.setDefaultCursor('default');
+						replayButton.setScale(1);
+					});
+					replayButton.on("pointerdown", () => {
+						replayButton.setScale(1);
+						this.tweens.add({
+							targets: replayButton,
+							scaleX: 0.8,
+							scaleY: 0.8,
+							yoyo: true,
+							duration: 100,
+							onComplete: () => {
+								gameOver = false;
+								nUserScore = 0;
+								nOpponentScore = 0;
+								this.userScore.setText(nUserScore, +"/9");
+								this.opponentScore.setText(nOpponentScore, +"/9");
+								this.scene.restart("Level");
+							}
+						});
+					});
 				}
 			});
 		})
-	}
-
-	reloadScreen() {
-		this.striker.disableInteractive();
-		this.slider.disableInteractive();
-		const tryAgainText = this.add.text(960, 600, "", {});
-		tryAgainText.setOrigin(0.5, 0.5);
-		tryAgainText.text = "Try again";
-		tryAgainText.setStyle({ "fontFamily": "GochiHand", "fontSize": "60px", "fontStyle": "bold", "color": "#553636ff" });
-		tryAgainText.setInteractive().on("pointerdown", () => {
-			nUserScore = 0;
-			nOpponentScore = 0;
-			this.userScore.setText(nUserScore, +"/9");
-			this.opponentScore.setText(nOpponentScore, +"/9");
-			this.scene.restart("Level");
-		});
 	}
 
 	create() {
@@ -326,7 +355,6 @@ class Level extends Phaser.Scene {
 		document.body.style.backgroundImage = "url('assets/images/background.png')";
 		this.editorCreate();
 		this.oSoundManager = new SoundManager(this);
-		this.oTweenManager = new TweenManager(this);
 
 		this.arrow = this.add.image(784, 773, "direction-arrow").setScale(0, 0).setOrigin(0.5, 0.5);
 		this.arrow.setVisible(false);
@@ -733,7 +761,7 @@ class Level extends Phaser.Scene {
 			}
 		});
 
-		this.input.on('dragend', (pointer, GameObject) => {
+		this.input.on('dragend', (pointer, gameObject) => {
 			this.strikeCoins();
 		});
 	}
@@ -834,7 +862,7 @@ class Level extends Phaser.Scene {
 			if (this.striker.visible == false) {
 				this.striker.setVisible(true);
 			}
-		}, 800);
+		}, 500);
 
 		if (!repeateUserTurn && !repeateOpponentTurn) {
 			userTurn = !userTurn;
@@ -845,19 +873,20 @@ class Level extends Phaser.Scene {
 			setTimeout(() => {
 				this.striker.setPosition(784, 773);
 				this.slider.setPosition(-188, -54);
-			}, 400);
+			}, 300);
 		}
 		else {
 			repeateOpponentTurn = false;
 			setTimeout(() => {
 				this.striker.setPosition(784, 318);
 				this.slider.setPosition(-188, -938);
-			}, 400);
+			}, 300);
 		}
 
 		this.physics.pause();
 		this.slider.setInteractive();
 		this.striker.setInteractive();
+
 	}
 	/* END-USER-CODE */
 }

@@ -2,6 +2,7 @@
     "id": "5c26fa8f-db0b-4263-b0b4-eca64538a519",
     "sceneType": "SCENE",
     "settings": {
+        "snapEnabled": true,
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "Level",

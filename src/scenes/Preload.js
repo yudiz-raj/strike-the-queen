@@ -33,10 +33,9 @@ class Preload extends Phaser.Scene {
 		const carrom = this.add.image(960, 540, "carrom");
 		carrom.scaleX = 0.9;
 		carrom.scaleY = 0.9;
-		carrom.tintTopLeft = 11974326;
-		carrom.tintTopRight = 11974326;
-		carrom.tintBottomLeft = 11974326;
-		carrom.tintBottomRight = 11974326;
+
+		// front
+		this.add.image(960, 540, "front");
 
 		// loading_bar
 		const loading_bar = this.add.image(960, 1000, "loading_bar");

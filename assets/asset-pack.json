@@ -43,16 +43,6 @@
                 "key": "direction-arrow"
             },
             {
-                "url": "src/scripts/GameManager.js",
-                "type": "script",
-                "key": "GameManager"
-            },
-            {
-                "url": "src/scripts/InputManager.js",
-                "type": "script",
-                "key": "InputManager"
-            },
-            {
                 "url": "src/scenes/Level.js",
                 "type": "sceneFile",
                 "key": "Level"
@@ -66,6 +56,11 @@
                 "url": "assets/images/player_2_slidebar.png",
                 "type": "image",
                 "key": "player_2_slidebar"
+            },
+            {
+                "url": "assets/images/replay_button.png",
+                "type": "image",
+                "key": "replay_button"
             },
             {
                 "url": [
@@ -93,11 +88,6 @@
                 "url": "assets/images/striker.png",
                 "type": "image",
                 "key": "striker"
-            },
-            {
-                "url": "src/scripts/TweenManager.js",
-                "type": "script",
-                "key": "TweenManager"
             },
             {
                 "url": [
