@@ -18,6 +18,53 @@
             "list": [
                 {
                     "type": "Container",
+                    "id": "28c7927f-60fa-4a52-a2e2-3b01b3808e5f",
+                    "label": "container_speedBreaker",
+                    "scope": "CLASS",
+                    "y": -3,
+                    "list": [
+                        {
+                            "type": "Rectangle",
+                            "id": "11bab468-28c6-453c-9e9a-4cc63b9e5a93",
+                            "label": "rectangle_1",
+                            "x": 720,
+                            "y": 560,
+                            "width": 80,
+                            "height": 600
+                        },
+                        {
+                            "type": "Rectangle",
+                            "id": "dce23ccf-60ba-47d5-8d5c-a03a08abaca6",
+                            "label": "rectangle_2",
+                            "x": 928,
+                            "y": 256,
+                            "angle": 90,
+                            "width": 80,
+                            "height": 600
+                        },
+                        {
+                            "type": "Rectangle",
+                            "id": "4d1a67a0-0714-406e-b292-eddce164a3b4",
+                            "label": "rectangle_3",
+                            "x": 928,
+                            "y": 832,
+                            "angle": 90,
+                            "width": 80,
+                            "height": 600
+                        },
+                        {
+                            "type": "Rectangle",
+                            "id": "c4073f67-1ba0-4cde-8c15-87df3cfd1a68",
+                            "label": "rectangle_4",
+                            "x": 1296,
+                            "y": 560,
+                            "width": 80,
+                            "height": 600
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
                     "id": "3fe60107-3d3b-49c2-966f-82342e62d8e2",
                     "label": "container_background",
                     "y": 1,
@@ -147,8 +194,6 @@
                     "type": "Container",
                     "id": "7003d251-016d-4163-8cfb-17995f4c91ce",
                     "label": "container_slider",
-                    "x": 967,
-                    "y": 1033,
                     "list": [
                         {
                             "type": "Image",
@@ -157,8 +202,10 @@
                             "texture": {
                                 "key": "player_1_slidebar"
                             },
-                            "x": 2,
-                            "y": -52
+                            "x": 965,
+                            "y": 990,
+                            "scaleX": 0.9,
+                            "scaleY": 0.9
                         },
                         {
                             "type": "Image",
@@ -167,8 +214,10 @@
                             "texture": {
                                 "key": "player_2_slidebar"
                             },
-                            "x": 2,
-                            "y": -934
+                            "x": 965,
+                            "y": 90,
+                            "scaleX": 0.9,
+                            "scaleY": 0.9
                         },
                         {
                             "type": "Sprite",
@@ -179,8 +228,8 @@
                             "texture": {
                                 "key": "striker"
                             },
-                            "x": -188,
-                            "y": -54,
+                            "x": 784,
+                            "y": 989,
                             "scaleX": 1.1,
                             "scaleY": 1.1
                         }
@@ -322,25 +371,19 @@
                     "type": "Container",
                     "id": "cfebfafe-c2db-4158-8f35-8801f0220306",
                     "label": "container_whiteCoins",
-                    "scope": "CLASS",
-                    "x": 1455,
-                    "y": 435
+                    "scope": "CLASS"
                 },
                 {
                     "type": "Container",
                     "id": "b3f5af65-8895-4331-b205-556e644f3ddc",
                     "label": "container_blackCoins",
-                    "scope": "CLASS",
-                    "x": 1455,
-                    "y": 432
+                    "scope": "CLASS"
                 },
                 {
                     "type": "Container",
                     "id": "35828eb3-427b-43f0-bd79-03546adcf315",
                     "label": "container_queen",
-                    "scope": "CLASS",
-                    "x": 1455,
-                    "y": 423
+                    "scope": "CLASS"
                 },
                 {
                     "type": "Container",
