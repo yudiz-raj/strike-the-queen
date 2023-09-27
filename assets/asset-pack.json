@@ -43,6 +43,16 @@
                 "key": "direction-arrow"
             },
             {
+                "url": "src/scenes/Home.js",
+                "type": "sceneFile",
+                "key": "Home"
+            },
+            {
+                "url": "assets/images/home_button.png",
+                "type": "image",
+                "key": "home_button"
+            },
+            {
                 "url": "src/scenes/Level.js",
                 "type": "sceneFile",
                 "key": "Level"

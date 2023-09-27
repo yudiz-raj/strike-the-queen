@@ -18,53 +18,6 @@
             "list": [
                 {
                     "type": "Container",
-                    "id": "28c7927f-60fa-4a52-a2e2-3b01b3808e5f",
-                    "label": "container_speedBreaker",
-                    "scope": "CLASS",
-                    "y": -3,
-                    "list": [
-                        {
-                            "type": "Rectangle",
-                            "id": "11bab468-28c6-453c-9e9a-4cc63b9e5a93",
-                            "label": "rectangle_1",
-                            "x": 720,
-                            "y": 560,
-                            "width": 80,
-                            "height": 600
-                        },
-                        {
-                            "type": "Rectangle",
-                            "id": "dce23ccf-60ba-47d5-8d5c-a03a08abaca6",
-                            "label": "rectangle_2",
-                            "x": 928,
-                            "y": 256,
-                            "angle": 90,
-                            "width": 80,
-                            "height": 600
-                        },
-                        {
-                            "type": "Rectangle",
-                            "id": "4d1a67a0-0714-406e-b292-eddce164a3b4",
-                            "label": "rectangle_3",
-                            "x": 928,
-                            "y": 832,
-                            "angle": 90,
-                            "width": 80,
-                            "height": 600
-                        },
-                        {
-                            "type": "Rectangle",
-                            "id": "c4073f67-1ba0-4cde-8c15-87df3cfd1a68",
-                            "label": "rectangle_4",
-                            "x": 1296,
-                            "y": 560,
-                            "width": 80,
-                            "height": 600
-                        }
-                    ]
-                },
-                {
-                    "type": "Container",
                     "id": "3fe60107-3d3b-49c2-966f-82342e62d8e2",
                     "label": "container_background",
                     "y": 1,
@@ -202,8 +155,8 @@
                             "texture": {
                                 "key": "player_1_slidebar"
                             },
-                            "x": 965,
-                            "y": 990,
+                            "x": 964,
+                            "y": 979,
                             "scaleX": 0.9,
                             "scaleY": 0.9
                         },
@@ -214,8 +167,8 @@
                             "texture": {
                                 "key": "player_2_slidebar"
                             },
-                            "x": 965,
-                            "y": 90,
+                            "x": 964,
+                            "y": 104,
                             "scaleX": 0.9,
                             "scaleY": 0.9
                         },
@@ -229,9 +182,9 @@
                                 "key": "striker"
                             },
                             "x": 784,
-                            "y": 989,
-                            "scaleX": 1.1,
-                            "scaleY": 1.1
+                            "y": 979,
+                            "scaleX": 0.6,
+                            "scaleY": 0.6
                         }
                     ]
                 },
@@ -249,8 +202,8 @@
                             },
                             "x": 390,
                             "y": 445,
-                            "scaleX": 0.7,
-                            "scaleY": 0.7
+                            "scaleX": 0.85,
+                            "scaleY": 0.85
                         },
                         {
                             "type": "Text",
@@ -292,12 +245,15 @@
                         {
                             "type": "Image",
                             "id": "f1bbab5b-b8dd-488a-be52-85c8783d01d2",
-                            "label": "whiteCoin",
+                            "label": "player_1Coin",
+                            "scope": "CLASS",
                             "texture": {
                                 "key": "whiteCoin"
                             },
-                            "x": 463,
-                            "y": 690
+                            "x": 462.10322254664015,
+                            "y": 685.8837893365247,
+                            "originX": 0.4929938826793139,
+                            "originY": 0.4678421182496111
                         }
                     ]
                 },
@@ -313,16 +269,16 @@
                             "texture": {
                                 "key": "avatar_2"
                             },
-                            "x": 1530,
+                            "x": 1543,
                             "y": 445,
-                            "scaleX": 0.7,
-                            "scaleY": 0.7
+                            "scaleX": 0.85,
+                            "scaleY": 0.85
                         },
                         {
                             "type": "Text",
                             "id": "dabef105-0590-4913-b4f9-b43137b06f89",
                             "label": "opponentName",
-                            "x": 1530,
+                            "x": 1543,
                             "y": 541,
                             "originX": 0.5,
                             "originY": 0.5,
@@ -337,7 +293,7 @@
                             "texture": {
                                 "key": "score_bar"
                             },
-                            "x": 1530,
+                            "x": 1543,
                             "y": 690,
                             "scaleX": 0.9,
                             "scaleY": 0.9
@@ -347,7 +303,7 @@
                             "id": "b53f86ba-32b1-416b-a207-c670e37bfa44",
                             "label": "opponentScore",
                             "scope": "CLASS",
-                            "x": 1500,
+                            "x": 1513,
                             "y": 690,
                             "originX": 0.5,
                             "originY": 0.5,
@@ -358,12 +314,16 @@
                         {
                             "type": "Image",
                             "id": "6920ca81-73cc-440b-9469-ac8327e53cb2",
-                            "label": "blackCoin",
+                            "label": "player_2Coin",
+                            "scope": "CLASS",
                             "texture": {
                                 "key": "blackCoin"
                             },
-                            "x": 1603,
-                            "y": 690
+                            "x": 1616,
+                            "y": 689.7022360926392,
+                            "scaleX": 1.72,
+                            "scaleY": 1.72,
+                            "originY": 0.4986475113444411
                         }
                     ]
                 },
@@ -389,8 +349,7 @@
                     "type": "Container",
                     "id": "68bf768c-9396-4ff3-b8e7-bc08000f8799",
                     "label": "container_striker",
-                    "scope": "CLASS",
-                    "y": -3
+                    "scope": "CLASS"
                 },
                 {
                     "type": "Container",
@@ -398,6 +357,17 @@
                     "label": "container_winnerImage",
                     "scope": "CLASS",
                     "y": -3
+                },
+                {
+                    "type": "Image",
+                    "id": "bc985fa3-856c-41d8-b8b4-c1b1fc281f4e",
+                    "label": "home_button",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "home_button"
+                    },
+                    "x": 176,
+                    "y": 109
                 }
             ]
         }

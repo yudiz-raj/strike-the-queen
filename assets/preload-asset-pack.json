@@ -37,6 +37,11 @@
                 "key": "LogoPrefab"
             },
             {
+                "url": "assets/images/play_button.png",
+                "type": "image",
+                "key": "play_button"
+            },
+            {
                 "url": "assets/images/redCoin.png",
                 "type": "image",
                 "key": "redCoin"

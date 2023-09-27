@@ -140,32 +140,36 @@ class Preload extends Phaser.Scene {
 			targets: this.logoPrefab.blackCoin,
 			x: 349,
 			y: -40,
-			duration: 500,
-			delay: 200,
+			duration: 1000,
+			delay: 400,
+			yoyo: true,
+			repeat: -1,
 		});
 		this.tweens.add({
 			targets: this.logoPrefab.redCoin,
 			x: 439,
 			y: -80,
-			duration: 500,
-			delay: 400,
+			duration: 1000,
+			delay: 800,
+			yoyo: true,
+			repeat: -1,
 		});
 		this.tweens.add({
 			targets: this.logoPrefab.whiteCoin,
 			x: 457,
 			y: 14,
-			duration: 500,
-			delay: 600,
+			duration: 1000,
+			delay: 1200,
+			yoyo: true,
+			repeat: -1,
 		});
-}
-
+	}
 	update() {
 		if (this.isGameLoaded1 && this.isGameLoaded2) {
 			this.scene.stop("Preload");
-			this.scene.start("Level");
+			this.scene.start("Home");
 		}
 	}
-
 	/* END-USER-CODE */
 }
 
