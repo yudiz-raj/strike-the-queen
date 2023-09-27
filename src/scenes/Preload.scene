@@ -89,7 +89,7 @@
             "type": "Text",
             "id": "8bf08443-bcd1-40cf-89c7-1dfb87386064",
             "label": "text_1",
-            "x": 724,
+            "x": 803,
             "y": 932,
             "text": "Loading...",
             "fontFamily": "Montserrat",
@@ -100,7 +100,7 @@
             "id": "6c151de8-4663-4084-8a91-7a0ff6510623",
             "label": "txt_progress",
             "scope": "CLASS",
-            "x": 936,
+            "x": 1015,
             "y": 932,
             "fontFamily": "Montserrat",
             "fontSize": "42px"

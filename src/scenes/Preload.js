@@ -50,12 +50,12 @@ class Preload extends Phaser.Scene {
 		this.add.existing(logoPrefab);
 
 		// text_1
-		const text_1 = this.add.text(724, 932, "", {});
+		const text_1 = this.add.text(803, 932, "", {});
 		text_1.text = "Loading...";
 		text_1.setStyle({ "fontFamily": "Montserrat", "fontSize": "42px" });
 
 		// txt_progress
-		const txt_progress = this.add.text(936, 932, "", {});
+		const txt_progress = this.add.text(1015, 932, "", {});
 		txt_progress.setStyle({ "fontFamily": "Montserrat", "fontSize": "42px" });
 
 		// progress (components)

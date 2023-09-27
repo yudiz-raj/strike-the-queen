@@ -111,7 +111,7 @@ class Level extends Phaser.Scene {
 		container_slider.add(slidebar);
 
 		// player_2_slidebar
-		const player_2_slidebar = this.add.image(964, 104, "player_2_slidebar");
+		const player_2_slidebar = this.add.image(964, 115, "player_2_slidebar");
 		player_2_slidebar.scaleX = 0.9;
 		player_2_slidebar.scaleY = 0.9;
 		container_slider.add(player_2_slidebar);
@@ -836,12 +836,12 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
-			this.striker.setBounce(0.5, 0.5);
+			this.striker.setBounce(0.3, 0.3);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
-			this.striker.setBounce(0.5, 0.5);
+			this.striker.setBounce(0.3, 0.3);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -858,7 +858,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
-			this.striker.setBounce(0.5, 0.5);
+			this.striker.setBounce(0.3, 0.3);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -982,7 +982,7 @@ class Level extends Phaser.Scene {
 
 				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 2.5;
 				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 2.5;
-
+				console.log(nStretchDistance);
 				if (nStretchDistance > 125) {
 					if (userTurn) {
 						gameObject.setVelocity(-nVelocityX, -nVelocityY);
@@ -1026,12 +1026,12 @@ class Level extends Phaser.Scene {
 			this.container_blackCoins.list.forEach((coin) => {
 				coin.body.setVelocity(0);
 			});
-		}, 50);
+		}, 2000);
 		setTimeout(() => {
 			this.container_whiteCoins.list.forEach((coin) => {
 				coin.body.setVelocity(0);
 			});
-		}, 60);
+		}, 3000);
 		queenCoin.body.setVelocity(0);
 
 		setTimeout(() => {
@@ -1058,20 +1058,22 @@ class Level extends Phaser.Scene {
 				this.striker.setInteractive();
 				this.findOverlappingCoins();
 				this.userTurnAniamtion(this.player_1Coin);
+				this.physics.pause();
 			}, 300);
 		}
 		else {
 			repeateOpponentTurn = false;
 			setTimeout(() => {
 				this.striker.setPosition(784, 318).setScale(0.5, 0.5);
-				this.slider.setPosition(784, 98);
+				this.slider.setPosition(784, 109);
 				this.slider.setInteractive();
 				this.striker.setInteractive();
 				this.findOverlappingCoins();
 				this.userTurnAniamtion(this.player_2Coin);
+				this.physics.pause();
 			}, 300);
 		}
-		this.physics.pause();
+		nStretchDistance = 0;
 	}
 	/* END-USER-CODE */
 }
