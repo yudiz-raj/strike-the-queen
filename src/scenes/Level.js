@@ -413,8 +413,7 @@ class Level extends Phaser.Scene {
 	}
 
 	popUpAnimation(text) {
-		let reduceScore = this.add.text(this.striker.x, this.striker.y, -text, { fontFamily: "Montserrat", fontSize: 60}).setAngle(-10);
-		console.log(reduceScore);
+		let reduceScore = this.add.text(this.striker.x, this.striker.y, -text, { fontFamily: "Montserrat", fontSize: 60 }).setAngle(-10);
 		this.tweens.add({
 			targets: reduceScore,
 			angle: 10,
@@ -454,10 +453,19 @@ class Level extends Phaser.Scene {
 		this.arrow.setVisible(false);
 		this.container_striker.add(this.arrow);
 
-		this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(0.5, 0.5);
-		this.striker.setName("striker");
-		this.striker.body.setCircle(50, 14, 14);
-		this.container_striker.add(this.striker);
+		if (userTurn) {
+			this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(0.5, 0.5);
+			this.striker.setName("striker");
+			this.striker.body.setCircle(50, 14, 14);
+			this.container_striker.add(this.striker);
+		}
+		if (!userTurn) {
+			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(0.5, 0.5);
+			this.striker.setName("striker");
+			this.striker.body.setCircle(50, 14, 14);
+			this.container_striker.add(this.striker);
+			this.slider.setPosition(784, 109);
+		}
 
 		// whiteCoin_1
 		const whiteCoin_1 = this.add.image(931, 555, "whiteCoin");
@@ -656,8 +664,7 @@ class Level extends Phaser.Scene {
 			this.decreaseMotion(coin);
 		});
 
-		this.physics.add.collider(this.hallsGroup, this.striker, () => {
-			this.striker.setVelocity(0, 0);
+		this.physics.add.overlap(this.hallsGroup, this.striker, () => {
 			this.striker.disableInteractive();
 			this.physics.pause();
 			this.coinFallAnimation(this.striker);
@@ -725,7 +732,7 @@ class Level extends Phaser.Scene {
 			}
 		});
 
-		this.physics.add.collider(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
+		this.physics.add.overlap(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
 			coin.body.destroy();
 			this.coinFallAnimation(coin);
 			nOpponentScore++;
@@ -761,7 +768,7 @@ class Level extends Phaser.Scene {
 			}
 		});
 
-		this.physics.add.collider(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
+		this.physics.add.overlap(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
 			coin.body.destroy();
 			this.coinFallAnimation(coin);
 			nUserScore++;
@@ -797,8 +804,8 @@ class Level extends Phaser.Scene {
 			}
 		});
 
-		this.physics.add.collider(this.hallsGroup, queenCoin, (hall, coin) => {
-			this.coinFallAnimation(queenCoin, 0.21);
+		this.physics.add.overlap(this.hallsGroup, queenCoin, (hall, coin) => {
+			this.coinFallAnimation(queenCoin);
 			if (!userTurn) {
 				if (this.container_blackCoins.list.length == 1) {
 					queenCoin.setVisible(false);
@@ -806,7 +813,7 @@ class Level extends Phaser.Scene {
 					opponentQueenFouls = true;
 					repeateOpponentTurn = true;
 					setTimeout(() => {
-						queenCoin.setPosition(967, 546).setVisible(true).setScale(0.21, 0.21);
+						queenCoin.setPosition(967, 546).setVisible(true).setAlpha(1);
 					}, 4000);
 				}
 				else {
@@ -823,7 +830,7 @@ class Level extends Phaser.Scene {
 					userQueenFouls = true;
 					repeateUserTurn = true;
 					setTimeout(() => {
-						queenCoin.setPosition(967, 546).setVisible(true).setScale(0.21, 0.21);
+						queenCoin.setPosition(967, 546).setVisible(true).setAlpha(1);
 					}, 4000);
 				}
 				else {
@@ -876,14 +883,10 @@ class Level extends Phaser.Scene {
 		coin.body.setBounce(0);
 		this.tweens.add({
 			targets: coin,
-			scaleX: 0,
-			scaleY: 0,
-			duration: 50,
+			alpha: 0,
+			duration: 200,
 			onComplete: () => {
-				if (coin == this.striker || coin == queenCoin) {
-					this.striker.setVisible(false);
-				}
-				else {
+				if (coin != this.striker && coin != queenCoin) {
 					coin.destroy();
 				}
 			}
@@ -982,7 +985,6 @@ class Level extends Phaser.Scene {
 
 				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 2.5;
 				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 2.5;
-				console.log(nStretchDistance);
 				if (nStretchDistance > 125) {
 					if (userTurn) {
 						gameObject.setVelocity(-nVelocityX, -nVelocityY);
@@ -1026,12 +1028,12 @@ class Level extends Phaser.Scene {
 			this.container_blackCoins.list.forEach((coin) => {
 				coin.body.setVelocity(0);
 			});
-		}, 2000);
+		}, 150);
 		setTimeout(() => {
 			this.container_whiteCoins.list.forEach((coin) => {
 				coin.body.setVelocity(0);
 			});
-		}, 3000);
+		}, 250);
 		queenCoin.body.setVelocity(0);
 
 		setTimeout(() => {
@@ -1052,7 +1054,7 @@ class Level extends Phaser.Scene {
 		if (userTurn) {
 			repeateUserTurn = false;
 			setTimeout(() => {
-				this.striker.setPosition(784, 773).setScale(0.5, 0.5);
+				this.striker.setPosition(784, 773).setAlpha(1);
 				this.slider.setPosition(784, 979);
 				this.slider.setInteractive();
 				this.striker.setInteractive();
@@ -1064,7 +1066,7 @@ class Level extends Phaser.Scene {
 		else {
 			repeateOpponentTurn = false;
 			setTimeout(() => {
-				this.striker.setPosition(784, 318).setScale(0.5, 0.5);
+				this.striker.setPosition(784, 318).setAlpha(1);
 				this.slider.setPosition(784, 109);
 				this.slider.setInteractive();
 				this.striker.setInteractive();
