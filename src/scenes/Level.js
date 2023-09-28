@@ -628,18 +628,18 @@ class Level extends Phaser.Scene {
 
 	}
 
-	decreaseMotion(coin) {
+	decreaseMotion(coin, value) {
 		if (coin.body.velocity.x < 0) {
-			coin.body.velocity.x += 20;
+			coin.body.velocity.x += value;
 		}
 		if (coin.body.velocity.x > 0) {
-			coin.body.velocity.x -= 20;
+			coin.body.velocity.x -= value;
 		}
 		if (coin.body.velocity.y < 0) {
-			coin.body.velocity.y += 20;
+			coin.body.velocity.y += value;
 		}
 		if (coin.body.velocity.y > 0) {
-			coin.body.velocity.y -= 20;
+			coin.body.velocity.y -= value;
 		}
 	}
 
@@ -647,21 +647,21 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.collider(this.wallGroup, this.striker, () => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(this.striker);
+			this.decreaseMotion(this.striker, 50);
 		});
 		this.physics.add.collider(this.wallGroup, queenCoin, () => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(queenCoin);
+			this.decreaseMotion(queenCoin, 30);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.whiteCoinGroup, (wall, coin) => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(coin);
+			this.decreaseMotion(coin, 40);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.blackCoinGroup, (wall, coin) => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(coin);
+			this.decreaseMotion(coin, 20);
 		});
 
 		this.physics.add.overlap(this.hallsGroup, this.striker, () => {
@@ -843,12 +843,12 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
-			this.striker.setBounce(0.3, 0.3);
+			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
-			this.striker.setBounce(0.3, 0.3);
+			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -865,7 +865,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
-			this.striker.setBounce(0.3, 0.3);
+			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -897,6 +897,7 @@ class Level extends Phaser.Scene {
 		this.slider.setInteractive();
 		this.input.setDraggable(this.slider);
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+			this.home_button.disableInteractive();
 			if (gameObject.name == "slider") {
 				dragX = Math.min(Math.max(784, dragX), 1152);
 
@@ -906,6 +907,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.input.on('dragend', (pointer, gameObject) => {
+			this.home_button.setInteractive();
 			this.findOverlappingCoins();
 			this.strikeCoins();
 		});
@@ -945,6 +947,7 @@ class Level extends Phaser.Scene {
 		this.findOverlappingCoins();
 
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+			this.home_button.disableInteractive();
 			this.findOverlappingCoins();
 			if (gameObject.name == "striker") {
 
@@ -979,6 +982,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.input.once('dragend', (pointer, gameObject) => {
+			this.home_button.setInteractive();
 			this.arrow.setVisible(false);
 			if (gameObject.name == "striker") {
 
@@ -1025,17 +1029,12 @@ class Level extends Phaser.Scene {
 
 		this.striker.body.setVelocity(0);
 		this.striker.setBounce(0);
-
-		setTimeout(() => {
-			this.container_blackCoins.list.forEach((coin) => {
-				coin.body.setVelocity(0);
-			});
-		}, 150);
-		setTimeout(() => {
-			this.container_whiteCoins.list.forEach((coin) => {
-				coin.body.setVelocity(0);
-			});
-		}, 250);
+		this.container_blackCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
+		this.container_whiteCoins.list.forEach((coin) => {
+			coin.body.setVelocity(0);
+		});
 		queenCoin.body.setVelocity(0);
 
 		setTimeout(() => {

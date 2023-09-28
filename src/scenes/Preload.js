@@ -54,23 +54,9 @@ class Preload extends Phaser.Scene {
 		const txt_progress = this.add.text(1015, 932, "", {});
 		txt_progress.setStyle({ "fontFamily": "Montserrat", "fontSize": "42px" });
 
-		// redCoin_1
-		const redCoin_1 = this.add.image(1399, 311, "redCoin");
-		redCoin_1.angle = 20;
-
-		// blackCoin_1
-		const blackCoin_1 = this.add.image(1310, 352, "blackCoin");
-		blackCoin_1.scaleX = 2.1;
-		blackCoin_1.scaleY = 2.1;
-
-		// whiteCoin_1
-		const whiteCoin_1 = this.add.image(1422, 407, "whiteCoin");
-		whiteCoin_1.scaleX = 1.2;
-		whiteCoin_1.scaleY = 1.2;
-		whiteCoin_1.angle = 45;
-
-		// logo_1
-		this.add.image(960, 534, "logo");
+		// logoPrefab
+		const logoPrefab = new LogoPrefab(this, 960, 391);
+		this.add.existing(logoPrefab);
 
 		// progress (components)
 		new PreloadText(progress);

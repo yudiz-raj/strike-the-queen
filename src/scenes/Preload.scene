@@ -94,50 +94,15 @@
             "fontSize": "42px"
         },
         {
-            "type": "Image",
-            "id": "11da3c02-6668-4830-b556-5f3b874482a1",
-            "label": "redCoin_1",
-            "texture": {
-                "key": "redCoin"
-            },
-            "x": 1399,
-            "y": 311,
-            "angle": 20
-        },
-        {
-            "type": "Image",
-            "id": "655d6f11-0ba4-4362-af0a-c5dcb0f91870",
-            "label": "blackCoin_1",
-            "texture": {
-                "key": "blackCoin"
-            },
-            "x": 1310,
-            "y": 352,
-            "scaleX": 2.1,
-            "scaleY": 2.1
-        },
-        {
-            "type": "Image",
-            "id": "00491783-542b-4b9e-afec-bd6c6f084ebf",
-            "label": "whiteCoin_1",
-            "texture": {
-                "key": "whiteCoin"
-            },
-            "x": 1422,
-            "y": 407,
-            "scaleX": 1.2,
-            "scaleY": 1.2,
-            "angle": 45
-        },
-        {
-            "type": "Image",
-            "id": "cc66d3e7-940a-4597-a741-f8c558a03269",
-            "label": "logo_1",
-            "texture": {
-                "key": "logo"
-            },
+            "prefabId": "dac555fd-eef3-43ba-84d8-7f33ac46cae6",
+            "id": "6eb67319-3b25-40ea-94e2-7dfc204552e8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "logoPrefab",
             "x": 960,
-            "y": 534
+            "y": 391
         }
     ],
     "plainObjects": [],
