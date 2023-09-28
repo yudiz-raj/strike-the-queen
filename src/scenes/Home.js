@@ -80,7 +80,7 @@ class Home extends Phaser.Scene {
 		this.tweens.add({
 			targets: this.logoPrefab.blackCoin,
 			x: 349,
-			y: -40,
+			y: 36,
 			duration: 1000,
 			delay: 400,
 			yoyo: true,
@@ -88,8 +88,8 @@ class Home extends Phaser.Scene {
 		});
 		this.tweens.add({
 			targets: this.logoPrefab.redCoin,
-			x: 439,
-			y: -80,
+			x: 385,
+			y: 68,
 			duration: 1000,
 			delay: 800,
 			yoyo: true,
@@ -97,8 +97,8 @@ class Home extends Phaser.Scene {
 		});
 		this.tweens.add({
 			targets: this.logoPrefab.whiteCoin,
-			x: 457,
-			y: 14,
+			x: 411,
+			y: 60,
 			duration: 1000,
 			delay: 1200,
 			yoyo: true,

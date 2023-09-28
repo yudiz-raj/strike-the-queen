@@ -9,18 +9,18 @@ class LogoPrefab extends Phaser.GameObjects.Container {
 		super(scene, x ?? 0, y ?? -143);
 
 		// redCoin
-		const redCoin = scene.add.image(385, 68, "redCoin");
+		const redCoin = scene.add.image(439, -80, "redCoin");
 		redCoin.angle = 20;
 		this.add(redCoin);
 
 		// blackCoin
-		const blackCoin = scene.add.image(349, 36, "blackCoin");
+		const blackCoin = scene.add.image(349, -40, "blackCoin");
 		blackCoin.scaleX = 2.1;
 		blackCoin.scaleY = 2.1;
 		this.add(blackCoin);
 
 		// whiteCoin
-		const whiteCoin = scene.add.image(411, 60, "whiteCoin");
+		const whiteCoin = scene.add.image(457, 14, "whiteCoin");
 		whiteCoin.scaleX = 1.2;
 		whiteCoin.scaleY = 1.2;
 		whiteCoin.angle = 45;

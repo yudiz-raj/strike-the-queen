@@ -45,10 +45,6 @@ class Preload extends Phaser.Scene {
 		innerBar.setOrigin(0, 0.5);
 		innerBar.visible = false;
 
-		// logoPrefab
-		const logoPrefab = new LogoPrefab(this, 960, 391);
-		this.add.existing(logoPrefab);
-
 		// text_1
 		const text_1 = this.add.text(803, 932, "", {});
 		text_1.text = "Loading...";
@@ -58,12 +54,29 @@ class Preload extends Phaser.Scene {
 		const txt_progress = this.add.text(1015, 932, "", {});
 		txt_progress.setStyle({ "fontFamily": "Montserrat", "fontSize": "42px" });
 
+		// redCoin_1
+		const redCoin_1 = this.add.image(1399, 311, "redCoin");
+		redCoin_1.angle = 20;
+
+		// blackCoin_1
+		const blackCoin_1 = this.add.image(1310, 352, "blackCoin");
+		blackCoin_1.scaleX = 2.1;
+		blackCoin_1.scaleY = 2.1;
+
+		// whiteCoin_1
+		const whiteCoin_1 = this.add.image(1422, 407, "whiteCoin");
+		whiteCoin_1.scaleX = 1.2;
+		whiteCoin_1.scaleY = 1.2;
+		whiteCoin_1.angle = 45;
+
+		// logo_1
+		this.add.image(960, 534, "logo");
+
 		// progress (components)
 		new PreloadText(progress);
 
 		this.loading_bar = loading_bar;
 		this.innerBar = innerBar;
-		this.logoPrefab = logoPrefab;
 		this.txt_progress = txt_progress;
 
 		this.events.emit("scene-awake");
@@ -73,8 +86,6 @@ class Preload extends Phaser.Scene {
 	loading_bar;
 	/** @type {Phaser.GameObjects.Image} */
 	innerBar;
-	/** @type {LogoPrefab} */
-	logoPrefab;
 	/** @type {Phaser.GameObjects.Text} */
 	txt_progress;
 
@@ -87,7 +98,6 @@ class Preload extends Phaser.Scene {
 		this.editorCreate();
 
 		this.editorPreload();
-		this.logoAnimation();
 		this.isGameLoaded1 = false;
 		this.isGameLoaded2 = false;
 		this.load.on(Phaser.Loader.Events.COMPLETE, (p) => {
@@ -135,35 +145,6 @@ class Preload extends Phaser.Scene {
 		const progressInterval = setInterval(updateProgressBar, intervalDuration);
 	}
 
-	logoAnimation() {
-		this.tweens.add({
-			targets: this.logoPrefab.blackCoin,
-			x: 349,
-			y: -40,
-			duration: 1000,
-			delay: 400,
-			yoyo: true,
-			repeat: -1,
-		});
-		this.tweens.add({
-			targets: this.logoPrefab.redCoin,
-			x: 439,
-			y: -80,
-			duration: 1000,
-			delay: 800,
-			yoyo: true,
-			repeat: -1,
-		});
-		this.tweens.add({
-			targets: this.logoPrefab.whiteCoin,
-			x: 457,
-			y: 14,
-			duration: 1000,
-			delay: 1200,
-			yoyo: true,
-			repeat: -1,
-		});
-	}
 	update() {
 		if (this.isGameLoaded1 && this.isGameLoaded2) {
 			this.scene.stop("Preload");

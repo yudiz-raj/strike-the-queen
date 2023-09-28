@@ -23,8 +23,8 @@
                     "texture": {
                         "key": "redCoin"
                     },
-                    "x": 385,
-                    "y": 68,
+                    "x": 439,
+                    "y": -80,
                     "angle": 20
                 },
                 {
@@ -36,7 +36,7 @@
                         "key": "blackCoin"
                     },
                     "x": 349,
-                    "y": 36,
+                    "y": -40,
                     "scaleX": 2.1,
                     "scaleY": 2.1
                 },
@@ -48,8 +48,8 @@
                     "texture": {
                         "key": "whiteCoin"
                     },
-                    "x": 411,
-                    "y": 60,
+                    "x": 457,
+                    "y": 14,
                     "scaleX": 1.2,
                     "scaleY": 1.2,
                     "angle": 45
