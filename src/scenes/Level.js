@@ -349,7 +349,6 @@ class Level extends Phaser.Scene {
 						replayButton.setScale(1);
 					});
 					replayButton.on("pointerdown", () => {
-						this.input.setDefaultCursor('default');
 						replayButton.setScale(1);
 						this.buttonAnimation(replayButton);
 					});
@@ -378,6 +377,7 @@ class Level extends Phaser.Scene {
 				this.userScore.setText(nUserScore, +"/9");
 				this.opponentScore.setText(nOpponentScore, +"/9");
 				if (button.texture.key == "replay_button") {
+					this.input.setDefaultCursor('default');
 					this.scene.restart("Level");
 				}
 				if (button.texture.key == "home_button") {
@@ -933,6 +933,8 @@ class Level extends Phaser.Scene {
 				if (this.striker.x >= 1130) {
 					this.striker.x = coin.x - 50;
 				}
+				this.slider.x = this.striker.x;
+				this.findOverlappingCoins();
 			}
 		}
 	}
