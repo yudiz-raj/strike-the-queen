@@ -56,7 +56,7 @@ class Level extends Phaser.Scene {
 		container_walls.add(wall_3);
 
 		// wall_4
-		const wall_4 = this.add.rectangle(1000, 876, 128, 128);
+		const wall_4 = this.add.rectangle(1050, 876, 128, 128);
 		wall_4.scaleY = 7;
 		wall_4.angle = 90;
 		container_walls.add(wall_4);
@@ -114,8 +114,8 @@ class Level extends Phaser.Scene {
 		// slider
 		const slider = this.add.sprite(784, 979, "striker");
 		slider.name = "slider";
-		slider.scaleX = 0.3;
-		slider.scaleY = 0.3;
+		slider.scaleX = 1.1;
+		slider.scaleY = 1.1;
 		container_slider.add(slider);
 
 		// container_user
@@ -360,7 +360,7 @@ class Level extends Phaser.Scene {
 		defaults = {
 		  origin: { y: 0.7 },
 		};
-	  
+
 	  function fire(particleRatio, opts) {
 		confetti(
 		  Object.assign({}, defaults, opts, {
@@ -368,29 +368,29 @@ class Level extends Phaser.Scene {
 		  })
 		);
 	  }
-	  
+
 	  fire(0.25, {
 		spread: 26,
 		startVelocity: 55,
 	  });
-	  
+
 	  fire(0.2, {
 		spread: 60,
 	  });
-	  
+
 	  fire(0.35, {
 		spread: 100,
 		decay: 0.91,
 		scalar: 0.8,
 	  });
-	  
+
 	  fire(0.1, {
 		spread: 120,
 		startVelocity: 25,
 		decay: 0.92,
 		scalar: 1.2,
 	  });
-	  
+
 	  fire(0.1, {
 		spread: 120,
 		startVelocity: 45,
@@ -493,15 +493,15 @@ class Level extends Phaser.Scene {
 		this.container_striker.add(this.arrow);
 
 		if (userTurn) {
-			this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(0.25, 0.25);
+			this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(1, 1);
 			this.striker.setName("striker");
-			this.striker.body.setCircle(115, 17, 17);
+			this.striker.body.setCircle(28, 5, 5);
 			this.container_striker.add(this.striker);
 		}
 		if (!userTurn) {
-			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(0.25, 0.25);
+			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(1, 1);
 			this.striker.setName("striker");
-			this.striker.body.setCircle(115, 17, 17);
+			this.striker.body.setCircle(28, 5, 5);
 			this.container_striker.add(this.striker);
 			this.slider.setPosition(784, 109);
 		}

@@ -63,7 +63,7 @@
                                     "type": "Rectangle",
                                     "id": "4a88babe-8bb1-4d67-b66a-e72162c23f4c",
                                     "label": "wall_4",
-                                    "x": 1000,
+                                    "x": 1050,
                                     "y": 876,
                                     "scaleY": 7,
                                     "angle": 90,
@@ -179,8 +179,8 @@
                             },
                             "x": 784,
                             "y": 979,
-                            "scaleX": 0.3,
-                            "scaleY": 0.3
+                            "scaleX": 1.1,
+                            "scaleY": 1.1
                         }
                     ]
                 },
