@@ -13,7 +13,6 @@ let nUserScore = 0;
 let nOpponentScore = 0;
 let userWin = true;
 let gameOver = false;
-let wrongCoin = false;
 /* START OF COMPILED CODE */
 
 class Level extends Phaser.Scene {
@@ -41,27 +40,23 @@ class Level extends Phaser.Scene {
 		container_background.add(container_walls);
 
 		// wall_1
-		const wall_1 = this.add.rectangle(621, 534, 128, 128);
-		wall_1.scaleX = 0.2;
+		const wall_1 = this.add.rectangle(613, 540, 128, 128);
 		wall_1.scaleY = 7;
 		container_walls.add(wall_1);
 
 		// wall_2
-		const wall_2 = this.add.rectangle(966, 179, 128, 128);
-		wall_2.scaleX = 0.2;
+		const wall_2 = this.add.rectangle(1050, 132, 128, 128);
 		wall_2.scaleY = 7;
 		wall_2.angle = 90;
 		container_walls.add(wall_2);
 
 		// wall_3
-		const wall_3 = this.add.rectangle(1319, 540, 128, 128);
-		wall_3.scaleX = 0.2;
+		const wall_3 = this.add.rectangle(1355, 540, 128, 128);
 		wall_3.scaleY = 7;
 		container_walls.add(wall_3);
 
 		// wall_4
-		const wall_4 = this.add.rectangle(969, 876, 128, 128);
-		wall_4.scaleX = 0.2;
+		const wall_4 = this.add.rectangle(1000, 876, 128, 128);
 		wall_4.scaleY = 7;
 		wall_4.angle = 90;
 		container_walls.add(wall_4);
@@ -119,8 +114,8 @@ class Level extends Phaser.Scene {
 		// slider
 		const slider = this.add.sprite(784, 979, "striker");
 		slider.name = "slider";
-		slider.scaleX = 0.6;
-		slider.scaleY = 0.6;
+		slider.scaleX = 0.3;
+		slider.scaleY = 0.3;
 		container_slider.add(slider);
 
 		// container_user
@@ -325,10 +320,13 @@ class Level extends Phaser.Scene {
 		queenCoin.body.setVelocity(0);
 		queenCoin.destroy();
 		this.physics.pause();
-		this.winnerAnimation(replayButton);
+		this.gameOverAnimation(replayButton, userWin);
 	}
 
-	winnerAnimation(replayButton) {
+	gameOverAnimation(replayButton, userWin) {
+		if(userWin){
+			this.winnerConfetti();
+		}
 		let pos = [540, 396, 559, 628, 784];
 		this.container_winnerImage.list.forEach((image, i) => {
 			this.tweens.add({
@@ -357,6 +355,48 @@ class Level extends Phaser.Scene {
 		})
 	}
 
+	winnerConfetti(){
+		const count = 200,
+		defaults = {
+		  origin: { y: 0.7 },
+		};
+	  
+	  function fire(particleRatio, opts) {
+		confetti(
+		  Object.assign({}, defaults, opts, {
+			particleCount: Math.floor(count * particleRatio),
+		  })
+		);
+	  }
+	  
+	  fire(0.25, {
+		spread: 26,
+		startVelocity: 55,
+	  });
+	  
+	  fire(0.2, {
+		spread: 60,
+	  });
+	  
+	  fire(0.35, {
+		spread: 100,
+		decay: 0.91,
+		scalar: 0.8,
+	  });
+	  
+	  fire(0.1, {
+		spread: 120,
+		startVelocity: 25,
+		decay: 0.92,
+		scalar: 1.2,
+	  });
+	  
+	  fire(0.1, {
+		spread: 120,
+		startVelocity: 45,
+	  });
+	}
+
 	buttonAnimation(button) {
 		this.tweens.add({
 			targets: button,
@@ -371,7 +411,6 @@ class Level extends Phaser.Scene {
 				opponentQueenFouls = false;
 				gameOver = false;
 				userTurn = true;
-				wrongCoin = false;
 				nUserScore = 0;
 				nOpponentScore = 0;
 				this.userScore.setText(nUserScore, +"/9");
@@ -454,15 +493,15 @@ class Level extends Phaser.Scene {
 		this.container_striker.add(this.arrow);
 
 		if (userTurn) {
-			this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(0.5, 0.5);
+			this.striker = this.physics.add.sprite(784, 773, "striker").setOrigin(0.5, 0.5).setScale(0.25, 0.25);
 			this.striker.setName("striker");
-			this.striker.body.setCircle(50, 14, 14);
+			this.striker.body.setCircle(115, 17, 17);
 			this.container_striker.add(this.striker);
 		}
 		if (!userTurn) {
-			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(0.5, 0.5);
+			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(0.25, 0.25);
 			this.striker.setName("striker");
-			this.striker.body.setCircle(50, 14, 14);
+			this.striker.body.setCircle(115, 17, 17);
 			this.container_striker.add(this.striker);
 			this.slider.setPosition(784, 109);
 		}
@@ -591,11 +630,11 @@ class Level extends Phaser.Scene {
 		this.container_walls.list.forEach((wall) => {
 			this.physics.add.existing(wall, true);
 			if (wall.angle != 90) {
-				wall.body.setSize(50, 900);
-				wall.body.setOffset(-15, 0);
+				wall.body.setSize(100, 900);
+				wall.body.setOffset(-3, 0);
 			}
 			else {
-				wall.body.setSize(900, 50);
+				wall.body.setSize(900, 100);
 				wall.body.setOffset(-450, 440);
 			}
 			this.wallGroup.add(wall);
@@ -758,8 +797,6 @@ class Level extends Phaser.Scene {
 				}
 			}
 			else {
-				repeateUserTurn = false;
-				wrongCoin = true;
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 				if (this.container_blackCoins.list.length == 0) {
 					userWin = false;
@@ -794,8 +831,6 @@ class Level extends Phaser.Scene {
 				}
 			}
 			else {
-				repeateOpponentTurn = false;
-				wrongCoin = true;
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 				if (this.container_whiteCoins.list.length == 0) {
 					userWin = true;
@@ -927,7 +962,7 @@ class Level extends Phaser.Scene {
 
 	chackOverlapping(coin) {
 		if (coin.x >= this.striker.x - 45 && coin.x <= this.striker.x + 45) {
-			if (coin.y >= this.striker.y - 45 && coin.y <= this.striker.y + 45) {
+			if (coin.y >= this.striker.y - 50 && coin.y <= this.striker.y + 50) {
 
 				if (this.striker.x > 740 && this.striker.x < 1152) {
 					this.striker.x = coin.x + 50;
@@ -936,7 +971,6 @@ class Level extends Phaser.Scene {
 					this.striker.x = coin.x - 50;
 				}
 				this.slider.x = this.striker.x;
-				this.findOverlappingCoins();
 			}
 		}
 	}
@@ -1043,11 +1077,6 @@ class Level extends Phaser.Scene {
 			}
 		}, 500);
 
-		if (wrongCoin) {
-			repeateUserTurn = false;
-			repeateOpponentTurn = false;
-			wrongCoin = false;
-		}
 		if (!repeateUserTurn && !repeateOpponentTurn) {
 			userTurn = !userTurn;
 		}

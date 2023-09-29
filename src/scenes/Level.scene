@@ -32,9 +32,8 @@
                                     "type": "Rectangle",
                                     "id": "69c48ea4-70d1-4498-969e-24b61d2a6828",
                                     "label": "wall_1",
-                                    "x": 621,
-                                    "y": 534,
-                                    "scaleX": 0.2,
+                                    "x": 613,
+                                    "y": 540,
                                     "scaleY": 7,
                                     "width": 128,
                                     "height": 128
@@ -43,9 +42,8 @@
                                     "type": "Rectangle",
                                     "id": "da20e4f7-0ddb-42a3-b40e-5736891ff081",
                                     "label": "wall_2",
-                                    "x": 966,
-                                    "y": 179,
-                                    "scaleX": 0.2,
+                                    "x": 1050,
+                                    "y": 132,
                                     "scaleY": 7,
                                     "angle": 90,
                                     "width": 128,
@@ -55,9 +53,8 @@
                                     "type": "Rectangle",
                                     "id": "4e4c0371-a436-4849-803c-c8df1028aafc",
                                     "label": "wall_3",
-                                    "x": 1319,
+                                    "x": 1355,
                                     "y": 540,
-                                    "scaleX": 0.2,
                                     "scaleY": 7,
                                     "width": 128,
                                     "height": 128
@@ -66,9 +63,8 @@
                                     "type": "Rectangle",
                                     "id": "4a88babe-8bb1-4d67-b66a-e72162c23f4c",
                                     "label": "wall_4",
-                                    "x": 969,
+                                    "x": 1000,
                                     "y": 876,
-                                    "scaleX": 0.2,
                                     "scaleY": 7,
                                     "angle": 90,
                                     "width": 128,
@@ -183,8 +179,8 @@
                             },
                             "x": 784,
                             "y": 979,
-                            "scaleX": 0.6,
-                            "scaleY": 0.6
+                            "scaleX": 0.3,
+                            "scaleY": 0.3
                         }
                     ]
                 },
