@@ -499,7 +499,7 @@ class Level extends Phaser.Scene {
 			this.container_striker.add(this.striker);
 		}
 		if (!userTurn) {
-			this.striker = this.physics.add.sprite(784, 318, "striker").setOrigin(0.5, 0.5).setScale(1, 1);
+			this.striker = this.physics.add.sprite(784, 313, "striker").setOrigin(0.5, 0.5).setScale(1, 1);
 			this.striker.setName("striker");
 			this.striker.body.setCircle(28, 5, 5);
 			this.container_striker.add(this.striker);
@@ -962,7 +962,7 @@ class Level extends Phaser.Scene {
 
 	chackOverlapping(coin) {
 		if (coin.x >= this.striker.x - 45 && coin.x <= this.striker.x + 45) {
-			if (coin.y >= this.striker.y - 50 && coin.y <= this.striker.y + 50) {
+			if (coin.y >= this.striker.y - 45 && coin.y <= this.striker.y + 45) {
 
 				if (this.striker.x > 740 && this.striker.x < 1152) {
 					this.striker.x = coin.x + 50;
@@ -1096,7 +1096,7 @@ class Level extends Phaser.Scene {
 		else {
 			repeateOpponentTurn = false;
 			setTimeout(() => {
-				this.striker.setPosition(784, 318).setAlpha(1);
+				this.striker.setPosition(784, 313).setAlpha(1);
 				this.slider.setPosition(784, 109);
 				this.slider.setInteractive();
 				this.striker.setInteractive();
