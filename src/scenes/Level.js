@@ -703,10 +703,10 @@ class Level extends Phaser.Scene {
 			this.decreaseMotion(coin, 20);
 		});
 
-		this.physics.add.overlap(this.hallsGroup, this.striker, () => {
+		this.physics.add.overlap(this.hallsGroup, this.striker, (hall, striker) => {
 			this.striker.disableInteractive();
 			this.physics.pause();
-			this.coinFallAnimation(this.striker);
+			this.coinFallAnimation(this.striker, hall);
 			strikerCollideWithHall = true;
 			this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
 			if (userTurn && nUserScore > 0) {
@@ -773,7 +773,7 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.overlap(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
 			coin.body.destroy();
-			this.coinFallAnimation(coin);
+			this.coinFallAnimation(coin, hall);
 			nOpponentScore++;
 			this.opponentScore.setText(nOpponentScore + "/9");
 
@@ -807,7 +807,7 @@ class Level extends Phaser.Scene {
 
 		this.physics.add.overlap(this.hallsGroup, this.whiteCoinGroup, (hall, coin) => {
 			coin.body.destroy();
-			this.coinFallAnimation(coin);
+			this.coinFallAnimation(coin, hall);
 			nUserScore++;
 			this.userScore.setText(nUserScore + "/9");
 			if (userTurn) {
@@ -840,7 +840,7 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.overlap(this.hallsGroup, queenCoin, (hall, coin) => {
-			this.coinFallAnimation(queenCoin);
+			this.coinFallAnimation(queenCoin, hall);
 			if (!userTurn) {
 				if (this.container_blackCoins.list.length == 1) {
 					queenCoin.setVisible(false);
@@ -913,11 +913,13 @@ class Level extends Phaser.Scene {
 		});
 	}
 
-	coinFallAnimation(coin) {
+	coinFallAnimation(coin, hall) {
 		coin.body.setVelocity(0, 0);
 		coin.body.setBounce(0);
 		this.tweens.add({
 			targets: coin,
+			x: hall.x,
+			y: hall.y,
 			alpha: 0,
 			duration: 200,
 			onComplete: () => {
@@ -1107,6 +1109,7 @@ class Level extends Phaser.Scene {
 		}
 		nStretchDistance = 0;
 	}
+
 	/* END-USER-CODE */
 }
 
