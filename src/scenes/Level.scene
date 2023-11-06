@@ -359,6 +359,7 @@
                     "id": "bc985fa3-856c-41d8-b8b4-c1b1fc281f4e",
                     "label": "home_button",
                     "scope": "CLASS",
+                    "hitArea.shape": "PIXEL_PERFECT",
                     "texture": {
                         "key": "home_button"
                     },

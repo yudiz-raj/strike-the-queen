@@ -34,20 +34,14 @@
             "texture": {
                 "key": "carrom"
             },
-            "x": 960,
+            "x": 959,
             "y": 540,
             "scaleX": 0.9,
-            "scaleY": 0.9
-        },
-        {
-            "type": "Image",
-            "id": "b20d28e7-f4a7-4866-83d7-3ff8bf354750",
-            "label": "front",
-            "texture": {
-                "key": "front"
-            },
-            "x": 960,
-            "y": 540
+            "scaleY": 0.9,
+            "tintTopLeft": "#ccc9c9",
+            "tintTopRight": "#ccc9c9",
+            "tintBottomLeft": "#ccc9c9",
+            "tintBottomRight": "#ccc9c9"
         },
         {
             "type": "Image",

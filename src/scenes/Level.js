@@ -212,6 +212,7 @@ class Level extends Phaser.Scene {
 
 		// home_button
 		const home_button = this.add.image(176, 109, "home_button");
+		home_button.setInteractive(this.input.makePixelPerfect());
 		body.add(home_button);
 
 		this.container_walls = container_walls;
@@ -265,32 +266,10 @@ class Level extends Phaser.Scene {
 
 	// Write your code here
 
-	changeTurn() {
-		let timeOut;
-		if (nStretchDistance < 90) {
-			timeOut = 100;
-		}
-		if (nStretchDistance > 90 && nStretchDistance < 150) {
-			timeOut = 3000;
-		}
-		if (nStretchDistance > 150 && nStretchDistance < 200) {
-			timeOut = 3500;
-		}
-		if (nStretchDistance > 200) {
-			timeOut = 4000;
-		}
-		setTimeout(() => {
-			if (!gameOver) {
-				this.stopMovement();
-			}
-		}, timeOut);
-	}
-
 	checkForWinner(userWin) {
+		clearInterval(this.interval);
 		let winnerText;
 		gameOver = true;
-		let layer = this.add.image(960, 540, "front").setAlpha(0.5);
-		this.container_winnerImage.add(layer);
 		if (userWin == true) {
 			winnerText = this.add.image(960, -75, "you_win").setScale(0.6, 0.6);
 		}
@@ -324,10 +303,13 @@ class Level extends Phaser.Scene {
 	}
 
 	gameOverAnimation(replayButton, userWin) {
-		if(userWin){
+		if (userWin) {
 			this.winnerConfetti();
 		}
-		let pos = [540, 396, 559, 628, 784];
+		this.player_1Coin.setScale(1, 1);
+		this.player_2Coin.setScale(1.72, 1.72);
+		this.userTurnTween.stop();
+		let pos = [396, 559, 628, 784];
 		this.container_winnerImage.list.forEach((image, i) => {
 			this.tweens.add({
 				targets: image,
@@ -337,7 +319,7 @@ class Level extends Phaser.Scene {
 				onComplete: () => {
 					this.striker.disableInteractive();
 					this.slider.disableInteractive();
-					replayButton.setInteractive();
+					replayButton.setInteractive(this.input.makePixelPerfect());
 					replayButton.on('pointerover', () => {
 						this.input.setDefaultCursor('pointer');
 						replayButton.setScale(1.1);
@@ -355,46 +337,46 @@ class Level extends Phaser.Scene {
 		})
 	}
 
-	winnerConfetti(){
+	winnerConfetti() {
 		const count = 200,
-		defaults = {
-		  origin: { y: 0.7 },
-		};
+			defaults = {
+				origin: { y: 0.7 },
+			};
 
-	  function fire(particleRatio, opts) {
-		confetti(
-		  Object.assign({}, defaults, opts, {
-			particleCount: Math.floor(count * particleRatio),
-		  })
-		);
-	  }
+		function fire(particleRatio, opts) {
+			confetti(
+				Object.assign({}, defaults, opts, {
+					particleCount: Math.floor(count * particleRatio),
+				})
+			);
+		}
 
-	  fire(0.25, {
-		spread: 26,
-		startVelocity: 55,
-	  });
+		fire(0.25, {
+			spread: 26,
+			startVelocity: 55,
+		});
 
-	  fire(0.2, {
-		spread: 60,
-	  });
+		fire(0.2, {
+			spread: 60,
+		});
 
-	  fire(0.35, {
-		spread: 100,
-		decay: 0.91,
-		scalar: 0.8,
-	  });
+		fire(0.35, {
+			spread: 100,
+			decay: 0.91,
+			scalar: 0.8,
+		});
 
-	  fire(0.1, {
-		spread: 120,
-		startVelocity: 25,
-		decay: 0.92,
-		scalar: 1.2,
-	  });
+		fire(0.1, {
+			spread: 120,
+			startVelocity: 25,
+			decay: 0.92,
+			scalar: 1.2,
+		});
 
-	  fire(0.1, {
-		spread: 120,
-		startVelocity: 45,
-	  });
+		fire(0.1, {
+			spread: 120,
+			startVelocity: 45,
+		});
 	}
 
 	buttonAnimation(button) {
@@ -497,6 +479,8 @@ class Level extends Phaser.Scene {
 			this.striker.setName("striker");
 			this.striker.body.setCircle(28, 5, 5);
 			this.container_striker.add(this.striker);
+			this.striker.setDamping(true);
+			this.striker.setDrag(0.6);
 		}
 		if (!userTurn) {
 			this.striker = this.physics.add.sprite(784, 313, "striker").setOrigin(0.5, 0.5).setScale(1, 1);
@@ -643,21 +627,27 @@ class Level extends Phaser.Scene {
 		this.container_whiteCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
 			coin.body.setCircle(50, 16, 10);
+			coin.body.setDamping(true);
+			coin.body.setDrag(0.5);
 			this.whiteCoinGroup.add(coin);
 		});
 
 		this.container_blackCoins.list.forEach((coin) => {
 			this.physics.add.existing(coin, false);
 			coin.body.setCircle(30, 34, 34);
+			coin.body.setDamping(true);
+			coin.body.setDrag(0.5);
 			this.blackCoinGroup.add(coin);
 		});
 
 		this.physics.add.existing(queenCoin, false);
 		queenCoin.body.setCircle(93, 40, 40);
+		queenCoin.body.setDamping(true);
+		queenCoin.body.setDrag(0.5);
 
 		this.container_halls.list.forEach((hall) => {
 			this.physics.add.existing(hall, true);
-			hall.body.setCircle(13, 15, 15);
+			hall.body.setCircle(10, 15, 15);
 			this.hallsGroup.add(hall);
 		})
 
@@ -667,40 +657,21 @@ class Level extends Phaser.Scene {
 
 	}
 
-	decreaseMotion(coin, value) {
-		if (coin.body.velocity.x < 0) {
-			coin.body.velocity.x += value;
-		}
-		if (coin.body.velocity.x > 0) {
-			coin.body.velocity.x -= value;
-		}
-		if (coin.body.velocity.y < 0) {
-			coin.body.velocity.y += value;
-		}
-		if (coin.body.velocity.y > 0) {
-			coin.body.velocity.y -= value;
-		}
-	}
-
 	setCollider() {
 
 		this.physics.add.collider(this.wallGroup, this.striker, () => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(this.striker, 50);
 		});
 		this.physics.add.collider(this.wallGroup, queenCoin, () => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(queenCoin, 30);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.whiteCoinGroup, (wall, coin) => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(coin, 40);
 		});
 
 		this.physics.add.collider(this.wallGroup, this.blackCoinGroup, (wall, coin) => {
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideWallSound, false);
-			this.decreaseMotion(coin, 20);
 		});
 
 		this.physics.add.overlap(this.hallsGroup, this.striker, (hall, striker) => {
@@ -878,12 +849,10 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(this.whiteCoinGroup, this.striker, () => {
-			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
 		this.physics.add.collider(this.blackCoinGroup, this.striker, () => {
-			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -900,7 +869,6 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.collider(queenCoin, this.striker, () => {
-			this.striker.body.setBounce(0.2);
 			this.oSoundManager.playSound(this.oSoundManager.coinCollideSound, false);
 		});
 
@@ -1025,8 +993,8 @@ class Level extends Phaser.Scene {
 				this.striker.disableInteractive();
 				this.slider.disableInteractive();
 
-				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 2.5;
-				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 2.5;
+				nVelocityX = Math.cos(this.striker.rotation) * nStretchDistance * 4;
+				nVelocityY = Math.sin(this.striker.rotation) * nStretchDistance * 4;
 				if (nStretchDistance > 125) {
 					if (userTurn) {
 						gameObject.setVelocity(-nVelocityX, -nVelocityY);
@@ -1036,19 +1004,23 @@ class Level extends Phaser.Scene {
 					}
 					gameObject.body.setBounce(1, 1);
 					this.container_whiteCoins.list.forEach((coin) => {
-						coin.body.setBounce(0.85, 0.85);
+						coin.body.setBounce(1, 1);
 					});
 					this.container_blackCoins.list.forEach((coin) => {
-						coin.body.setBounce(0.85, 0.85);
+						coin.body.setBounce(1, 1);
 					});
-					queenCoin.body.setBounce(0.85, 0.85);
+					queenCoin.body.setBounce(1, 1);
 
 					strikerCollideWithHall = false;
 					repeateUserTurn = false;
 					repeateOpponentTurn = false;
 					this.physics.resume();
 					this.striker.disableInteractive();
-					this.changeTurn();
+					this.interval = setInterval(() => {
+						if (this.striker.body.velocity.x < 2 && this.striker.body.velocity.x > -1 && this.striker.body.velocity.y < 2 && this.striker.body.velocity.y > -1) {
+							this.stopMovement();
+						}
+					}, 1000);
 				}
 				else {
 					this.slider.setInteractive();
@@ -1062,7 +1034,7 @@ class Level extends Phaser.Scene {
 	}
 
 	stopMovement() {
-
+		clearInterval(this.interval);
 		this.striker.body.setVelocity(0);
 		this.striker.setBounce(0);
 		this.container_blackCoins.list.forEach((coin) => {

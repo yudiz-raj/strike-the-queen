@@ -20,9 +20,10 @@ class Home extends Phaser.Scene {
 		const carrom = this.add.image(960, 540, "carrom");
 		carrom.scaleX = 0.9;
 		carrom.scaleY = 0.9;
-
-		// front
-		this.add.image(960, 540, "front");
+		carrom.tintTopLeft = 13421001;
+		carrom.tintTopRight = 13421001;
+		carrom.tintBottomLeft = 13421001;
+		carrom.tintBottomRight = 13421001;
 
 		// logoPrefab
 		const logoPrefab = new LogoPrefab(this, 960, 391);
@@ -30,6 +31,7 @@ class Home extends Phaser.Scene {
 
 		// play_button
 		const play_button = this.add.image(960, 790, "play_button");
+		play_button.setInteractive(this.input.makePixelPerfect());
 
 		this.logoPrefab = logoPrefab;
 		this.play_button = play_button;

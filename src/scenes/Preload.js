@@ -30,12 +30,13 @@ class Preload extends Phaser.Scene {
 		progress.setStyle({ "fontSize": "54px" });
 
 		// carrom
-		const carrom = this.add.image(960, 540, "carrom");
+		const carrom = this.add.image(959, 540, "carrom");
 		carrom.scaleX = 0.9;
 		carrom.scaleY = 0.9;
-
-		// front
-		this.add.image(960, 540, "front");
+		carrom.tintTopLeft = 13421001;
+		carrom.tintTopRight = 13421001;
+		carrom.tintBottomLeft = 13421001;
+		carrom.tintBottomRight = 13421001;
 
 		// loading_bar
 		const loading_bar = this.add.image(960, 1000, "loading_bar");
