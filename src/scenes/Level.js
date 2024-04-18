@@ -9,6 +9,7 @@ let repeateUserTurn = false;
 let repeateOpponentTurn = false;
 let userQueenFouls = false;
 let opponentQueenFouls = false;
+let queenCovered = false;
 let nUserScore = 0;
 let nOpponentScore = 0;
 let userWin = true;
@@ -391,6 +392,7 @@ class Level extends Phaser.Scene {
 				repeateOpponentTurn = false;
 				userQueenFouls = false;
 				opponentQueenFouls = false;
+				queenCovered = false;
 				gameOver = false;
 				userTurn = true;
 				nUserScore = 0;
@@ -740,6 +742,9 @@ class Level extends Phaser.Scene {
 				this.container_blackCoins.add(blackCoinCharge);
 				this.blackCoinGroup.add(blackCoinCharge);
 			}
+			if (queenCoin.visible == false && !queenCovered) {
+				queenCoin.setPosition(967, 546).setVisible(true);
+			}
 		});
 
 		this.physics.add.overlap(this.hallsGroup, this.blackCoinGroup, (hall, coin) => {
@@ -747,29 +752,41 @@ class Level extends Phaser.Scene {
 			this.coinFallAnimation(coin, hall);
 			nOpponentScore++;
 			this.opponentScore.setText(nOpponentScore + "/9");
-
 			if (!userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
-				if (this.container_blackCoins.list.length == 0 && !opponentQueenFouls) {
-					userWin = true;
-					this.checkForWinner(userWin);
-				}
-				if (!strikerCollideWithHall) {
-					repeateOpponentTurn = true;
-					if (repeateUserTurn) {
-						repeateOpponentTurn = false;
+				if (this.container_blackCoins.list.length >= 2) {
+					if (!opponentQueenFouls) {
+						if (!strikerCollideWithHall) {
+							repeateOpponentTurn = true;
+							if (repeateUserTurn) {
+								repeateOpponentTurn = false;
+							}
+						} else {
+							strikerCollideWithHall = false;
+						}
 					}
-					if (opponentQueenFouls) {
+					if (opponentQueenFouls && !strikerCollideWithHall) {
+						queenCoin.setPosition(this.opponentScore.x - 120, this.opponentScore.y).setVisible(true).setScale(0.4);
+						queenCoin.body.setVelocity(0);
+						queenCovered = true;
+						opponentQueenFouls = false;
+					}
+				}
+				else {
+					if (!queenCovered) {
+						userWin = true;
+						this.checkForWinner(userWin);
+					}
+					else {
 						userWin = false;
 						this.checkForWinner(userWin);
 					}
-				} else {
-					strikerCollideWithHall = false;
 				}
 			}
 			else {
+				console.log(`%c black coins ::`, 'color: #00ff00', this.container_blackCoins.list.length);
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-				if (this.container_blackCoins.list.length == 0) {
+				if (this.container_blackCoins.list.length == 1) {
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -783,27 +800,41 @@ class Level extends Phaser.Scene {
 			this.userScore.setText(nUserScore + "/9");
 			if (userTurn) {
 				this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
-				if (this.container_whiteCoins.list.length == 0 && !userQueenFouls) {
-					userWin = false;
-					this.checkForWinner(userWin);
-				}
-				if (!strikerCollideWithHall) {
-					repeateUserTurn = true;
-					if (repeateOpponentTurn) {
-						repeateUserTurn = false;
+				if (this.container_whiteCoins.list.length >= 2) {
+					if (!userQueenFouls) {
+						if (!strikerCollideWithHall) {
+							repeateUserTurn = true;
+							if (repeateOpponentTurn) {
+								repeateUserTurn = false;
+							}
+						}
+						else {
+							strikerCollideWithHall = false;
+						}
 					}
-					if (userQueenFouls) {
+					if (userQueenFouls && !strikerCollideWithHall) {
+						queenCoin.setPosition(this.userScore.x - 120, this.userScore.y).setVisible(true).setScale(0.4);
+						queenCoin.body.setVelocity(0);
+						queenCovered = true;
+						userQueenFouls = false;
+					}
+				}
+				else {
+					if (!queenCovered) {
+						userWin = false;
+						this.checkForWinner(userWin);
+					}
+					else {
 						userWin = true;
 						this.checkForWinner(userWin);
 					}
 				}
-				else {
-					strikerCollideWithHall = false;
-				}
 			}
 			else {
+				console.log(`%c white coins ::`, 'color: #ff0000', this.container_whiteCoins.list.length);
+
 				this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-				if (this.container_whiteCoins.list.length == 0) {
+				if (this.container_whiteCoins.list.length == 1) {
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
@@ -811,37 +842,44 @@ class Level extends Phaser.Scene {
 		});
 
 		this.physics.add.overlap(this.hallsGroup, queenCoin, (hall, coin) => {
-			this.coinFallAnimation(queenCoin, hall);
+			// this.coinFallAnimation(coin, hall);
+			queenCoin.setPosition(0, 0).setVisible(false);
 			if (!userTurn) {
-				if (this.container_blackCoins.list.length == 1) {
-					queenCoin.setVisible(false);
+				if (this.container_blackCoins.list.length >= 1) {
 					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
 					opponentQueenFouls = true;
-					repeateOpponentTurn = true;
-					setTimeout(() => {
-						queenCoin.setPosition(967, 546).setVisible(true).setAlpha(1);
-					}, 4000);
+					if (!strikerCollideWithHall) {
+						repeateOpponentTurn = true;
+						if (repeateUserTurn) {
+							repeateOpponentTurn = false;
+						}
+					}
+					else {
+						strikerCollideWithHall = false;
+					}
 				}
 				else {
 					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-					queenCoin.setVisible(false);
 					userWin = true;
 					this.checkForWinner(userWin);
 				}
 			}
 			else {
-				if (this.container_whiteCoins.list.length == 1) {
+				if (this.container_whiteCoins.list.length >= 1) {
 					this.oSoundManager.playSound(this.oSoundManager.rightCoinFoulsSound, false);
-					queenCoin.setVisible(false);
 					userQueenFouls = true;
-					repeateUserTurn = true;
-					setTimeout(() => {
-						queenCoin.setPosition(967, 546).setVisible(true).setAlpha(1);
-					}, 4000);
+					if (!strikerCollideWithHall) {
+						repeateUserTurn = true;
+						if (repeateOpponentTurn) {
+							repeateUserTurn = false;
+						}
+					}
+					else {
+						strikerCollideWithHall = false;
+					}
 				}
 				else {
 					this.oSoundManager.playSound(this.oSoundManager.wrongCoinFoulsSound, false);
-					queenCoin.setVisible(false);
 					userWin = false;
 					this.checkForWinner(userWin);
 				}
@@ -893,6 +931,9 @@ class Level extends Phaser.Scene {
 			onComplete: () => {
 				if (coin != this.striker && coin != queenCoin) {
 					coin.destroy();
+				}
+				if (coin == queenCoin) {
+					queenCoin.setVisible(false);
 				}
 			}
 		})
@@ -1052,10 +1093,25 @@ class Level extends Phaser.Scene {
 		}, 500);
 
 		if (!repeateUserTurn && !repeateOpponentTurn) {
+			if (userTurn) {
+				if (userQueenFouls && !queenCovered) {
+					console.log(`%c userQueenFouls`, 'color: #ff0000', userQueenFouls);
+					queenCoin.setPosition(964, 546).setVisible(true);
+					userQueenFouls = false;
+				}
+			}
+			else {
+				if (opponentQueenFouls && !queenCovered) {
+					console.log(`%c opponentQueenFouls`, 'color: #00ff00', opponentQueenFouls);
+					queenCoin.setPosition(964, 546).setVisible(true);
+					opponentQueenFouls = false;
+				}
+			}
 			userTurn = !userTurn;
 		}
 
 		if (userTurn) {
+			console.log(`%c repeateuserTurn`, 'color: #ff0000', repeateUserTurn);
 			repeateUserTurn = false;
 			setTimeout(() => {
 				this.striker.setPosition(784, 773).setAlpha(1);
