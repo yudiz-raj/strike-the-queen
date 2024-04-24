@@ -31,12 +31,30 @@
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center center;
+			overflow: hidden;
+		}
+
+		canvas {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			margin: 0 !important;
+		}
+
+		#game-division {
+			max-height: calc(var(--vh, 1vh) * 100);
+		}
+
+		:root {
+			--vh: 1vh;
 		}
 	</style>
 
 </head>
 
 <body>
+	<div id="game-division"></div>
 </body>
 
 </html>
